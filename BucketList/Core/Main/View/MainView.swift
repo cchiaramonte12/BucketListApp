@@ -9,10 +9,31 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            NewStack {_ in
+                HomeView(viewModel: .init())
+            }
+            .tabItem { Label(
+                title: { Text("Home") },
+                icon: { Image(systemName: "house") }
+            ) }
+            
+            NewStack { _ in
+                MapView()
+            }
+            .tabItem { Label (
+                title: { Text("Map") },
+                icon: { Image(systemName: "map") }
+                ) } 
+            
+            NewStack {_ in
+               ProfileView()
+            }
+            .tabItem { Label(
+                title: { Text("Profile") },
+                icon: { Image(systemName: "person") }
+            ) }
+            
+        }
     }
-}
-
-#Preview {
-    MainView()
 }

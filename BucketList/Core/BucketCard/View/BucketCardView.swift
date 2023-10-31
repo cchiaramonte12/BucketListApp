@@ -20,28 +20,32 @@ struct BucketCardView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                     } else {
-                        Rectangle().foregroundStyle(Color(.systemGray6))
+                        Rectangle().foregroundStyle(Color(.random))
                     }
                 }
-                    .frame(height: 80)
-                    .clipped()
+                .frame(height: 80)
+                .clipped()
             }
             
             VStack(alignment: .leading) {
                 HStack {
                     Text(bucket.title)
                         .fontWeight(.bold)
+                        .foregroundColor(.black)
                     
                     Spacer()
-                    if let date = bucket.date {
-                        Text(date)
-                            .foregroundColor(.secondary)
-                    }
+                    
+                    Text(Date(), style: .date)
+                        .foregroundColor(.secondary)
                 }
-                if let description = bucket.description {
-                    Text(description)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
+                
+                HStack {
+                    
+                    if let description = bucket.description {
+                        Text(description)
+                            .font(.footnote)
+                            .foregroundColor(.black)
+                    }
                 }
             }
             .padding([.bottom, .leading, .trailing])
@@ -52,6 +56,13 @@ struct BucketCardView: View {
     }
 }
 
-#Preview {
-    BucketCardView(bucket: bucket1)
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 1.0
+        )
+    }
 }

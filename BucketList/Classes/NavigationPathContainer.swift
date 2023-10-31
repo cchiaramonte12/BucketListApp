@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct NavigationPathContainer: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    NavigationPathContainer()
+class NavigationPathContainer: ObservableObject {
+    @Published var path: NavigationPath = .init()
 }

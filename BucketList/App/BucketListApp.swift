@@ -17,13 +17,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
-struct BucketListApp: App {
+struct BucketApp: App {
     
+    // register app delegate for Firebase setup (Copied from Firebase website)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    //@ObservedObject var appState = AppState.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
 }
+
+/**ContentView()
+ .environmentObject(appState)*/

@@ -7,12 +7,21 @@
 
 import SwiftUI
 
-struct ItemToggleStyle: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct ItemToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            Image(systemName: configuration.isOn ? "largecircle.fill.circle" : "circle")
+                .foregroundColor(configuration.isOn ? Color(hex: "398378") : .gray)
+                .onTapGesture {
+                    configuration.isOn.toggle()
+            }
+            configuration.label
+        }
     }
 }
 
-#Preview {
+extension ToggleStyle where Self == ItemToggleStyle {
+  static var item: ItemToggleStyle {
     ItemToggleStyle()
+  }
 }

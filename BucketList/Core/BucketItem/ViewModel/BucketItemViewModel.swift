@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+class BucketItemViewModel: ObservableObject {
+    
+    
+}

@@ -14,7 +14,7 @@ class ContentViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>() // to go to login page on signout
     
     init() {
-        
+        setupSubscribers()
     }
     
     private func setupSubscribers() {

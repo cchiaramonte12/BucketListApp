@@ -8,11 +8,63 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject var viewModel: HomeViewModel
+    
+    @State private var showingSheet = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ZStack(alignment: .bottomTrailing) {
+                ScrollView(showsIndicators: false) {
+                    LazyVStack {
+                        if let buckets = viewModel.buckets {
+                            ForEach(buckets) {bucket in
+                                ZStack {
+                                    NavigationLink(value: NavigationDestination.bucketView(id: bucket.id, bucket: bucket)) {
+                                        BucketCardView(bucket: bucket)
+                                    }
+                                    Menu() {
+                                        Button(role: .destructive) {
+                                            Task {
+                                                do {
+                                                    try await FirebaseService.shared.deleteBucket(id: bucket.id)
+                                                    viewModel.refresh()
+                                                } catch {
+                                                    print("failed to delete item")
+                                                    print(error.localizedDescription)
+                                                }
+                                            }
+                                        } label: {
+                                            Label("Delete Bucket", systemImage: "trash")
+                                        }
+                                    } label: {
+                                        Image(systemName: "ellipsis.circle")
+                                            .foregroundColor(Color(hex: "398378"))
+                                    }
+                                    .offset(x: 155, y: 40)
+                                }
+                            }
+                        } else {
+                            ProgressView()
+                        }
+                    }
+                }
+                .refreshable {
+                    await viewModel.asyncRefresh()
+                }
+                SheetButton {
+                    Image(systemName: "plus")
+                        .font(.title.weight(.semibold))
+                        .padding()
+                        .background(Color(hex: "398378"))
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                } content: { _ in
+                    CreateBucketView(viewModel: .init())
+                }
+                .padding()
+            }
+        }
     }
-}
-
-#Preview {
-    HomeView()
 }
