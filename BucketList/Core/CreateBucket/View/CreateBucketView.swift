@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct CreateBucketView: View {
     
@@ -40,6 +41,31 @@ struct CreateBucketView: View {
                 .frame(height: 55)
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
+            
+            PhotosPicker(selection: $viewModel.selectedItem) {
+                if let image = viewModel.headerImage {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 80)
+                        .clipped()
+                } else {
+                    Spacer()
+                    HStack {
+                        
+                        Image(systemName: "photo")
+                        
+                        Text("Select a photo")
+                        
+                    }
+                    .padding(.horizontal)
+                    .frame(width: 200, height: 35)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    
+                    Spacer()
+                }
+            }
             
             Button(action: {
                 Task { 

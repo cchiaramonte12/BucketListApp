@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E069B272AF148DB0031A3A7 /* NoBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E069B262AF148DB0031A3A7 /* NoBucketsView.swift */; };
 		7E3B13E72AED5A640076CB37 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E62AED5A640076CB37 /* FirebaseService.swift */; };
 		7E3B13E92AED5E0F0076CB37 /* BucketListErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */; };
 		7E5606CB2AE03114001F826A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5606CA2AE03114001F826A /* MapView.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E069B262AF148DB0031A3A7 /* NoBucketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoBucketsView.swift; sourceTree = "<group>"; };
 		7E3B13E62AED5A640076CB37 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListErrors.swift; sourceTree = "<group>"; };
 		7E5606CA2AE03114001F826A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E069B242AF148BE0031A3A7 /* NoBuckets */ = {
+			isa = PBXGroup;
+			children = (
+				7E069B252AF148CA0031A3A7 /* View */,
+			);
+			path = NoBuckets;
+			sourceTree = "<group>";
+		};
+		7E069B252AF148CA0031A3A7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E069B262AF148DB0031A3A7 /* NoBucketsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7E5606C82AE03101001F826A /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +254,7 @@
 				7E5F33582AD6FB1B000357DC /* Home */,
 				7E5F33792AD707F1000357DC /* Main */,
 				7E5606C82AE03101001F826A /* Map */,
+				7E069B242AF148BE0031A3A7 /* NoBuckets */,
 				7E5F33572AD6FB14000357DC /* Profile */,
 				7E5F33592AD6FB21000357DC /* Root */,
 			);
@@ -652,6 +671,7 @@
 				7E5F33692AD6FBF9000357DC /* LogInView.swift in Sources */,
 				7E5F33722AD6FC60000357DC /* HomeView.swift in Sources */,
 				7E5F33782AD70676000357DC /* LogInViewModel.swift in Sources */,
+				7E069B272AF148DB0031A3A7 /* NoBucketsView.swift in Sources */,
 				7E5606CB2AE03114001F826A /* MapView.swift in Sources */,
 				7EFE4B742AE0AC8400A13A53 /* ItemToggleStyle.swift in Sources */,
 				7EA3ACC22ADD705200B40EFC /* AddItemView.swift in Sources */,

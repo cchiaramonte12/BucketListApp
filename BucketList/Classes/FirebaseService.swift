@@ -5,9 +5,11 @@
 //  Created by Cameron Chiaramonte on 10/28/23.
 //
 
+import Foundation
 import FirebaseFirestoreSwift
 import Firebase
 import Combine
+import FirebaseStorage
 
 class FirebaseService: ObservableObject {
     private init() { }
@@ -67,13 +69,27 @@ class FirebaseService: ObservableObject {
                                                              type: BucketItem.self)
         
     }
-
+    
     func deleteBucket(id: UUID) async throws {
         guard let reference = FirebasePaths.getBucket(id: id).documentReference else {
             throw BucketListErrors.firebaseReferenceInvalid
         }
         
         try await FirebaseService.deleteDocument(documentReference: reference)
+        
+        let itemsReference = FirebasePaths.getAllBucketsItemsFor(bucketID: id).collectionReference
+        guard itemsReference != nil else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        
+        do {
+            let documents = try await itemsReference!.getDocuments()
+            for document in documents.documents {
+                try await FirebaseService.deleteDocument(documentReference: document.reference)
+            }
+        } catch {
+            throw error
+        }
     }
     
     
@@ -163,9 +179,9 @@ enum FirebasePaths {
                 .document(bucketItemId.uuidString)
                 .self
             
-        //case .delBucket
+            //case .delBucket
             
-        //case .delItem
+            //case .delItem
             
         default:
             return nil

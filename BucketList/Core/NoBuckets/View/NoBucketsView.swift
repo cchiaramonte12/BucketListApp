@@ -9,7 +9,26 @@ import SwiftUI
 
 struct NoBucketsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            
+            Spacer()
+            
+            Image("bucket-logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 260, height: 120)
+                .padding()
+            
+            Text("No Buckets")
+                .fontWeight(.semibold)
+                .padding(.bottom)
+            
+            Text("Create your first BucketList by tapping the + below!")
+                .font(.footnote)
+            
+        }
+        
     }
 }
 

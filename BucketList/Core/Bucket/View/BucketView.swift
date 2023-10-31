@@ -16,7 +16,7 @@ struct BucketView: View {
             if let bucket = viewModel.bucket {
                 VStack(alignment: .leading, spacing: 4) {
                     Group {
-                        if let image = bucket.headerImage {
+                        if let image = bucket.headerImageURL {
                             Image(image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -82,14 +82,19 @@ struct BucketView: View {
                             }
                         }
                     } else {
-                        Text("Get started by adding a new bucket item above!")
-                            .foregroundStyle(Color(.systemGray3))
-                            .padding()
+                        HStack {
+                            Spacer()
+                            Text("Get started by adding a new Bucket List Item above!")
+                                .foregroundStyle(Color(.systemGray3))
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            Spacer()
+                        }
                     }
                 }
             } else {
                 ProgressView {
-                    Text("Loading bucket")
+                    Text("Loading Buckets")
                 }
             }
         }

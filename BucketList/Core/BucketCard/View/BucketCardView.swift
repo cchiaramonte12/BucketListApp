@@ -15,7 +15,7 @@ struct BucketCardView: View {
         VStack {
             ZStack {
                 Group {
-                    if let image = bucket.headerImage {
+                    if let image = bucket.headerImageURL {
                         Image(image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
