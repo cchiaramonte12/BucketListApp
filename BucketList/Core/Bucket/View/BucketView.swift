@@ -65,7 +65,7 @@ struct BucketView: View {
                         List {
                             ForEach(items) { item in
                                 HStack {
-                                    BucketItemView(item: item)
+                                    BucketItemView(viewModel: BucketItemViewModel(item: item, bucketId: viewModel.bucketId, bucketItemId: item.id))
                                         .swipeActions() {
                                             Button(role: .destructive) {
                                                 Task {

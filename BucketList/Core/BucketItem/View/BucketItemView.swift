@@ -9,17 +9,22 @@ import SwiftUI
 
 struct BucketItemView: View {
     
-    @State var item: BucketItem
+    @StateObject var viewModel: BucketItemViewModel
     
     var body: some View {
         VStack {
             HStack {
-                Toggle(isOn: $item.isCompleted) {
-                    Text(item.title)
+                Toggle(isOn: $viewModel.item.isCompleted) {
+                    Text(viewModel.title)
                         .font(.headline)
                         .fontWeight(.semibold)
                 }
                 .toggleStyle(.item)
+                .onChange(of: viewModel.item.isCompleted) { oldValue, newValue in
+                    Task {
+                        await viewModel.completeItem(value: newValue)
+                    }
+                }
             }
             .cornerRadius(12)
         }
