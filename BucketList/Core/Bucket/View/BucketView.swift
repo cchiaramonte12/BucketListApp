@@ -21,7 +21,7 @@ struct BucketView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                         } else {
-                            Rectangle().foregroundStyle(Color(uiColor: bucket.fallbackColor))
+                            Rectangle().foregroundStyle(Color(.random))
                         }
                     }
                     .frame(height: 150)

@@ -40,14 +40,10 @@ class CreateBucketViewModel: ObservableObject {
     func uploadBucket() async throws {
         let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageURL: headerImageURL.isEmpty ? nil : "", items: items)
         try await FirebaseService.shared.uploadBucket(bucket)
-        try await updateImageData()
+        try await updateHeaderImage(id: bucket.id)
     }
     
-    func updateImageData() async throws {
-        try await updateHeaderImage()
-    }
-    
-    private func updateHeaderImage() async throws {
+    private func updateHeaderImage(id: UUID) async throws {
         guard let image = self.uiImage else { return }
         guard let imageUrl = try? await FirebaseService.shared.uploadImage(image) else { return }
         do {
