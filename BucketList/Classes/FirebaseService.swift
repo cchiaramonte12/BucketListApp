@@ -126,14 +126,13 @@ extension FirebaseService {
     }
     
     fileprivate static func updateFieldOnDocument<C: Codable>(docref: DocumentReference, field: String, value: C) async -> Result<C, Error> {
-        do {
-            let data = try Firestore.Encoder().encode(value)
-            try await docref.updateData([field : data])
-            return .success(value)
-        } catch {
-            return .failure(error)
+            do {
+                try await docref.setData([field : value], merge: true)
+                return .success(value)
+            } catch {
+                return .failure(error)
+            }
         }
-    }
     
     fileprivate static func pushObjectToDocument<T: Codable>(docref: DocumentReference, object: T) throws {
         try docref.setData(from: object, merge: true)
