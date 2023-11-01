@@ -101,6 +101,14 @@ class FirebaseService: ObservableObject {
         try await FirebaseService.deleteDocument(documentReference: reference)
     }
     
+    func completeBucketItem(bucketID: UUID, itemID: UUID, isCompleted: Bool) async throws -> Result<Bool, any Error> {
+        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "isCompleted", value: isCompleted)
+    }
+    
 }
 
 extension FirebaseService {
@@ -178,10 +186,6 @@ enum FirebasePaths {
                 .collection(FirebasePaths.FirebasePathComponent.bucketItems.rawValue)
                 .document(bucketItemId.uuidString)
                 .self
-            
-            //case .delBucket
-            
-            //case .delItem
             
         default:
             return nil

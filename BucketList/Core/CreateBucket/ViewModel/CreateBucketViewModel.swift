@@ -22,6 +22,7 @@ class CreateBucketViewModel: ObservableObject {
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { await loadImage() } }
     }
+    
     @Published var headerImage: Image?
     
     private var uiImage: UIImage?
