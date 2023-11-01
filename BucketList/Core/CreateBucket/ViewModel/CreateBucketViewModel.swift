@@ -18,6 +18,7 @@ class CreateBucketViewModel: ObservableObject {
     @Published var description = ""
     @Published var headerImageURL = ""
     @Published var items = [BucketItem]()
+    @Published var id = UUID()
     
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { await loadImage() } }
@@ -32,11 +33,29 @@ class CreateBucketViewModel: ObservableObject {
         guard let item = selectedItem else { return }
         guard let data = try? await item.loadTransferable(type: Data.self) else { return }
         guard let uiImage = UIImage(data: data) else { return }
+        self.uiImage = uiImage
         self.headerImage = Image(uiImage: uiImage)
     }
     
     func uploadBucket() async throws {
         let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageURL: headerImageURL.isEmpty ? nil : "", items: items)
         try await FirebaseService.shared.uploadBucket(bucket)
+        try await updateImageData()
     }
+    
+    func updateImageData() async throws {
+        try await updateHeaderImage()
+    }
+    
+    private func updateHeaderImage() async throws {
+        guard let image = self.uiImage else { return }
+        guard let imageUrl = try? await FirebaseService.shared.uploadImage(image) else { return }
+        do {
+            let result = try await FirebaseService.shared.updateBucketHeaderImage(withImageUrl: imageUrl, bucketID: id)
+            print(result)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
 }
