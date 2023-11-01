@@ -109,6 +109,27 @@ class FirebaseService: ObservableObject {
         return await FirebaseService.updateFieldOnDocument(docref: reference, field: "isCompleted", value: isCompleted)
     }
     
+    func uploadImage(_ image: UIImage) async throws -> String? {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return nil }
+        let filename = NSUUID().uuidString
+        let storageRef = Storage.storage().reference(withPath: "/bucket_images/\(filename)")
+        do {
+            let _ = try await storageRef.putDataAsync(imageData)
+            let url = try await storageRef.downloadURL()
+            return url.absoluteString
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    func updateBucketHeaderImage(withImageUrl imageUrl: String, bucketID: UUID) async throws -> Result<String, any Error> {
+        guard let reference = FirebasePaths.getBucket(id: bucketID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "headerImageUrl", value: imageUrl)
+    }
+    
 }
 
 extension FirebaseService {

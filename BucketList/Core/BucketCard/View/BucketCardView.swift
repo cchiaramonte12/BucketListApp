@@ -9,27 +9,27 @@ import SwiftUI
 
 struct BucketCardView: View {
     
-    let bucket: Bucket
+    @StateObject var viewModel: BucketCardViewModel
     
     var body: some View {
         VStack {
             ZStack {
                 Group {
-                    if let image = bucket.headerImageURL {
-                        Image(image)
+                    AsyncImage(url: URL(string: viewModel.bucket.headerImageUrl)) { image in
+                        image
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } else {
+                            .scaledToFill()
+                    } placeholder: {
+                        //ProgressView()
                         Rectangle().foregroundStyle(Color(.random))
                     }
+                    .frame(height: 100)
+                    .clipped()
                 }
-                .frame(height: 80)
-                .clipped()
             }
-            
             VStack(alignment: .leading) {
                 HStack {
-                    Text(bucket.title)
+                    Text(viewModel.bucket.title)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
@@ -41,7 +41,7 @@ struct BucketCardView: View {
                 
                 HStack {
                     
-                    if let description = bucket.description {
+                    if let description = viewModel.bucket.description {
                         Text(description)
                             .font(.footnote)
                             .foregroundColor(.black)
