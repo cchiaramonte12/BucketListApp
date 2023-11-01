@@ -16,7 +16,7 @@ class CreateBucketViewModel: ObservableObject {
     
     @Published var title = ""
     @Published var description = ""
-    @Published var headerImageURL = ""
+    @Published var headerImageUrl = ""
     @Published var items = [BucketItem]()
     @Published var id = UUID()
     
@@ -38,7 +38,7 @@ class CreateBucketViewModel: ObservableObject {
     }
     
     func uploadBucket() async throws {
-        let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageURL: headerImageURL.isEmpty ? nil : "", items: items)
+        let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageUrl: headerImageUrl.isEmpty ? nil : "", items: items)
         try await FirebaseService.shared.uploadBucket(bucket)
         try await updateHeaderImage(id: bucket.id)
     }

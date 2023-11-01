@@ -15,7 +15,7 @@ struct Bucket: Identifiable, Hashable, Codable {
     var title: String
     var date: Date
     var description: String?
-    var headerImageURL: String?
+    var headerImageUrl: String?
     var items: [BucketItem]?
     
     var fallbackColor: UIColor {

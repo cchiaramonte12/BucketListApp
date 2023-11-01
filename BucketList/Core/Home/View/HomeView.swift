@@ -22,10 +22,10 @@ struct HomeView: View {
                     LazyVStack {
                         if let buckets = viewModel.buckets {
                             if !buckets.isEmpty {
-                                ForEach(buckets) {bucket in
+                                ForEach(buckets) { bucket in
                                     ZStack {
                                         NavigationLink(value: NavigationDestination.bucketView(id: bucket.id, bucket: bucket)) {
-                                            BucketCardView(bucket: bucket)
+                                            BucketCardView(viewModel: BucketCardViewModel(bucket: bucket))
                                         }
                                         Menu() {
                                             Button(role: .destructive) {
@@ -45,7 +45,7 @@ struct HomeView: View {
                                             Image(systemName: "ellipsis.circle")
                                                 .foregroundColor(Color(hex: "398378"))
                                         }
-                                        .offset(x: 155, y: 40)
+                                        .offset(x: 155, y: 60)
                                     }
                                 }
                             } else {
