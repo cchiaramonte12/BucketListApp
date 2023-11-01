@@ -15,14 +15,12 @@ struct BucketView: View {
         Group {
             if let bucket = viewModel.bucket {
                 VStack(alignment: .leading, spacing: 4) {
-                    Group {
-                        if let image = bucket.headerImageURL {
-                            Image(image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        } else {
-                            Rectangle().foregroundStyle(Color(.random))
-                        }
+                    AsyncImage(url: URL(string: bucket.headerImageURL)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        Rectangle().foregroundStyle(Color(.random))
                     }
                     .frame(height: 150)
                     .clipped()
