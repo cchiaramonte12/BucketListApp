@@ -47,7 +47,7 @@ class BucketItemViewModel: ViewModel {
     
     func completeItem(value: Bool) async {
         do {
-            let result = try await FirebaseService.shared.completeBucketItem(bucketID: bucketId, itemID: bucketItemId, isCompleted: value)
+            _ = try await FirebaseService.shared.completeBucketItem(bucketID: bucketId, itemID: bucketItemId, isCompleted: value)
         } catch {
             print(error.localizedDescription)
         }
