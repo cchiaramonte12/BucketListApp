@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6E15D5612AF2D5460053891B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E15D5602AF2D5460053891B /* URL.swift */; };
 		7E069B272AF148DB0031A3A7 /* NoBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E069B262AF148DB0031A3A7 /* NoBucketsView.swift */; };
+		7E08C0452AF3F65C0047B94C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E08C0442AF3F65C0047B94C /* MapViewModel.swift */; };
 		7E3B13E72AED5A640076CB37 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E62AED5A640076CB37 /* FirebaseService.swift */; };
 		7E3B13E92AED5E0F0076CB37 /* BucketListErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */; };
 		7E5606CB2AE03114001F826A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5606CA2AE03114001F826A /* MapView.swift */; };
@@ -76,12 +77,14 @@
 		7EF32B942AD9E7520059FE7A /* SheetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF32B932AD9E7520059FE7A /* SheetButton.swift */; };
 		7EF32B972AD9F82E0059FE7A /* CreateBucketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF32B962AD9F82E0059FE7A /* CreateBucketViewModel.swift */; };
 		7EF32B9A2AD9F8670059FE7A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF32B992AD9F8670059FE7A /* HomeViewModel.swift */; };
+		7EFA06032AF41512006BBF98 /* MapItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA06022AF41512006BBF98 /* MapItemDetailsView.swift */; };
 		7EFE4B742AE0AC8400A13A53 /* ItemToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE4B732AE0AC8400A13A53 /* ItemToggleStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6E15D5602AF2D5460053891B /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		7E069B262AF148DB0031A3A7 /* NoBucketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoBucketsView.swift; sourceTree = "<group>"; };
+		7E08C0442AF3F65C0047B94C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		7E3B13E62AED5A640076CB37 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListErrors.swift; sourceTree = "<group>"; };
 		7E5606CA2AE03114001F826A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 		7EF32B932AD9E7520059FE7A /* SheetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetButton.swift; sourceTree = "<group>"; };
 		7EF32B962AD9F82E0059FE7A /* CreateBucketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBucketViewModel.swift; sourceTree = "<group>"; };
 		7EF32B992AD9F8670059FE7A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7EFA06022AF41512006BBF98 /* MapItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemDetailsView.swift; sourceTree = "<group>"; };
 		7EFE4B732AE0AC8400A13A53 /* ItemToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToggleStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,10 +192,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7E08C0422AF3F6420047B94C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7E08C0442AF3F65C0047B94C /* MapViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7E5606C82AE03101001F826A /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				7E5606C92AE0310C001F826A /* View */,
+				7E08C0422AF3F6420047B94C /* ViewModel */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -223,12 +236,12 @@
 		7E5F330C2AD6F967000357DC /* BucketList */ = {
 			isa = PBXGroup;
 			children = (
-				6E15D55F2AF2D5350053891B /* Extension */,
 				7E5F33542AD6FAFE000357DC /* App */,
 				7E5F335A2AD6FB25000357DC /* Classes */,
 				7E5F33552AD6FB07000357DC /* Core */,
 				7EF32B8B2AD9E2EF0059FE7A /* Components */,
 				7EF32B8E2AD9E3C00059FE7A /* Enums */,
+				6E15D55F2AF2D5350053891B /* Extension */,
 				7E5F335B2AD6FB28000357DC /* Structs */,
 				7E5F331B2AD6FA15000357DC /* GoogleService-Info.plist */,
 				7E5F33112AD6F968000357DC /* Assets.xcassets */,
@@ -265,6 +278,7 @@
 				7E5F33582AD6FB1B000357DC /* Home */,
 				7E5F33792AD707F1000357DC /* Main */,
 				7E5606C82AE03101001F826A /* Map */,
+				7EFA06002AF41502006BBF98 /* MapItemDetails */,
 				7E069B242AF148BE0031A3A7 /* NoBuckets */,
 				7E5F33572AD6FB14000357DC /* Profile */,
 				7E5F33592AD6FB21000357DC /* Root */,
@@ -566,6 +580,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		7EFA06002AF41502006BBF98 /* MapItemDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7EFA06012AF4150A006BBF98 /* View */,
+			);
+			path = MapItemDetails;
+			sourceTree = "<group>";
+		};
+		7EFA06012AF4150A006BBF98 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7EFA06022AF41512006BBF98 /* MapItemDetailsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -672,6 +702,7 @@
 				7E3B13E92AED5E0F0076CB37 /* BucketListErrors.swift in Sources */,
 				7E9C615A2AEDA746006FBFAB /* BucketItemViewModel.swift in Sources */,
 				7E5F33672AD6FBDF000357DC /* ForgotPassView.swift in Sources */,
+				7E08C0452AF3F65C0047B94C /* MapViewModel.swift in Sources */,
 				7EF32B942AD9E7520059FE7A /* SheetButton.swift in Sources */,
 				7E5F337C2AD70805000357DC /* MainView.swift in Sources */,
 				7EBD6D8C2AE2F4A5004839DA /* AddItemViewModel.swift in Sources */,
@@ -699,6 +730,7 @@
 				7EF32B922AD9E4160059FE7A /* DestinationView.swift in Sources */,
 				7E8BE2662ADD8804000124BB /* User.swift in Sources */,
 				7E5F33762AD70373000357DC /* ContentViewModel.swift in Sources */,
+				7EFA06032AF41512006BBF98 /* MapItemDetailsView.swift in Sources */,
 				7EF32B8A2AD9E2BF0059FE7A /* NavigationPathContainer.swift in Sources */,
 				7E8BE26C2ADD8BBE000124BB /* ProfileViewModel.swift in Sources */,
 				7E97DD042AE0A29D002626C2 /* BucketViewModel.swift in Sources */,

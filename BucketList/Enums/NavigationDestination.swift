@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 enum NavigationDestination: Hashable {
     static func == (lhs: NavigationDestination, rhs: NavigationDestination) -> Bool {
@@ -21,7 +22,7 @@ enum NavigationDestination: Hashable {
     case profile
     case addItem(bucketId: UUID, actionAfterAddedItem: () -> Void)
     case createBucket
-    case map
+    case map(searchText: String, results: [MKMapItem], title: String)
     
     var equatableValue: String {
         
