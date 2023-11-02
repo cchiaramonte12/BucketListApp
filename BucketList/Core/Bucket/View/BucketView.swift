@@ -11,6 +11,8 @@ struct BucketView: View {
     
     @StateObject var viewModel: BucketViewModel
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         Group {
             if let bucket = viewModel.bucket {
@@ -20,7 +22,8 @@ struct BucketView: View {
                             .resizable()
                             .scaledToFill()
                     } placeholder: {
-                        ProgressView()
+                        //ProgressView()
+                        Rectangle().foregroundStyle(Color(.random))
                     }
                     .frame(height: 150)
                     .clipped()
@@ -43,6 +46,28 @@ struct BucketView: View {
                                 Text(description)
                                     .font(.subheadline)
                             }
+                            
+                            Spacer()
+                            
+                            Menu() {
+                                Button(role: .destructive) {
+                                    Task {
+                                        do {
+                                            try await FirebaseService.shared.deleteBucket(id: bucket.id)
+                                            dismiss()
+                                        } catch {
+                                            print("failed to delete item")
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                } label: {
+                                    Label("Delete Bucket", systemImage: "trash")
+                                }
+                            } label: {
+                                Image(systemName: "ellipsis.circle")
+                                    .foregroundColor(Color(hex: "398378"))
+                            }
+                            //.offset(x: 155, y: 60)
                         }
                     }
                     .padding([.bottom, .leading, .trailing])

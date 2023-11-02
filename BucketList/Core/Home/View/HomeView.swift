@@ -26,26 +26,10 @@ struct HomeView: View {
                                     ZStack {
                                         NavigationLink(value: NavigationDestination.bucketView(id: bucket.id, bucket: bucket)) {
                                             BucketCardView(viewModel: BucketCardViewModel(bucket: bucket))
+                                                .onAppear(perform: {
+                                                    viewModel.refresh()
+                                                })
                                         }
-                                        Menu() {
-                                            Button(role: .destructive) {
-                                                Task {
-                                                    do {
-                                                        try await FirebaseService.shared.deleteBucket(id: bucket.id)
-                                                        viewModel.refresh()
-                                                    } catch {
-                                                        print("failed to delete item")
-                                                        print(error.localizedDescription)
-                                                    }
-                                                }
-                                            } label: {
-                                                Label("Delete Bucket", systemImage: "trash")
-                                            }
-                                        } label: {
-                                            Image(systemName: "ellipsis.circle")
-                                                .foregroundColor(Color(hex: "398378"))
-                                        }
-                                        .offset(x: 155, y: 60)
                                     }
                                 }
                             } else {
