@@ -21,8 +21,8 @@ struct DestinationView: View {
             AddItemView(bucketId: bucketId, actionAfterAddedItem: actionAfterAddedItem)
         case .createBucket:
             CreateBucketView(viewModel: CreateBucketViewModel())
-        case .map:
-            MapView()
+        case .map(let searchText, let results, let title):
+            MapView(viewModel: .init(searchText: searchText, results: results, title: title))
         }
     }
 }
