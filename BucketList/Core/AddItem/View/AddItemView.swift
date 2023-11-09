@@ -11,16 +11,39 @@ struct AddItemView: View {
     let bucketId: UUID
     let actionAfterAddedItem: () -> Void
     @State private var title = ""
+    
+    @EnvironmentObject var locationManager: LocationManager
+    
+    @State private var searchText = ""
+
+    @StateObject var addLocationViewModel: AddLocationViewModel
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ScrollView {
             VStack {
+                
                 TextField("Name your item...", text: $title)
                     .padding(.horizontal)
                     .frame(height: 55)
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
+                
+                NavigationLink(value: NavigationDestination.addLocation,
+                               label: {
+                    Text("Add a Location to this Item")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "398378"))
+                        .frame(width: 352, height: 44)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                })
+                .searchable(text: $searchText)
+                .onChange(of: searchText) { oldValue, newValue in
+                    addLocationViewModel.search(text: newValue, region: locationManager.region)
+                }
                 
                 Button(action: {
                     Task {

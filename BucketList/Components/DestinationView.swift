@@ -18,11 +18,13 @@ struct DestinationView: View {
         case .profile:
             ProfileView()
         case .addItem(let bucketId, let actionAfterAddedItem):
-            AddItemView(bucketId: bucketId, actionAfterAddedItem: actionAfterAddedItem)
+            AddItemView(bucketId: bucketId, actionAfterAddedItem: actionAfterAddedItem, addLocationViewModel: AddLocationViewModel())
         case .createBucket:
             CreateBucketView(viewModel: CreateBucketViewModel())
         case .map(let searchText, let results, let title):
             MapView(viewModel: .init(searchText: searchText, results: results, title: title))
+        case .addLocation:
+            AddLocationView(viewModel: AddLocationViewModel())
         }
     }
 }
