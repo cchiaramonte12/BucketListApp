@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 import Firebase
 import Combine
 import FirebaseStorage
+import SwiftUI
 
 class FirebaseService: ObservableObject {
     private init() { }
@@ -128,6 +129,13 @@ class FirebaseService: ObservableObject {
             throw BucketListErrors.firebaseReferenceInvalid
         }
         return await FirebaseService.updateFieldOnDocument(docref: reference, field: "headerImageUrl", value: imageUrl)
+    }
+    
+    func uploadColor(color: String, bucketID: UUID) async throws -> Result<String, any Error> {
+        guard let reference = FirebasePaths.getBucket(id: bucketID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "color", value: color)
     }
     
 }

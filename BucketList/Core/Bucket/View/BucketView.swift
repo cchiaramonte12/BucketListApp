@@ -36,7 +36,7 @@ struct BucketView: View {
                             
                             Spacer()
                             
-                            Text(Date(), style: .date)
+                            Text(viewModel.bucket?.date ?? Date(), style: .date)
                                 .foregroundColor(.secondary)
                         }
                         

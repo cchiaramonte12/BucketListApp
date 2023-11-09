@@ -35,7 +35,7 @@ struct BucketCardView: View {
                     
                     Spacer()
                     
-                    Text(Date(), style: .date)
+                    Text(viewModel.bucket.date, style: .date)
                         .foregroundColor(.secondary)
                 }
                 

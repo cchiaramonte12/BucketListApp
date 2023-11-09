@@ -17,6 +17,7 @@ struct Bucket: Identifiable, Hashable, Codable {
     var description: String?
     var headerImageUrl: String?
     var items: [BucketItem]?
+    var color: String?
     
     var fallbackColor: UIColor {
         getRandomColor()

@@ -14,7 +14,10 @@ struct CreateBucketView: View {
     
     @StateObject var viewModel: CreateBucketViewModel
     
+    //@State private var color: Color = Color.black
+    
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 4) {
             
             //only show x if there is text and remove text on button click
@@ -66,6 +69,16 @@ struct CreateBucketView: View {
                     Spacer()
                 }
             }
+            
+            ColorPicker("Pick a Color", selection: $viewModel.color)
+                .fontWeight(.semibold)
+                .padding()
+            
+            Rectangle()
+                .frame(height: 50)
+                .foregroundColor(viewModel.color)
+                .cornerRadius(20)
+                .padding()
             
             Button(action: {
                 Task { 
