@@ -23,6 +23,8 @@ enum NavigationDestination: Hashable {
     case addItem(bucketId: UUID, actionAfterAddedItem: () -> Void)
     case createBucket
     case map(searchText: String, results: [MKMapItem], title: String)
+    //case addLocation
+
     
     var equatableValue: String {
         
@@ -40,6 +42,8 @@ enum NavigationDestination: Hashable {
                 return ["createBucket"]
             case .map:
                 return ["map"]
+            //case .addLocation:
+            //    return ["addLocation"]
             }
         }
         

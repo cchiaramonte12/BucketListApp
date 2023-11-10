@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import MapKit
 
 class BucketItemViewModel: ViewModel {
     
-    
     @Published var bucket: Bucket?
     @Published var item: BucketItem
+    @Published var location: Location?
     
     let bucketId: UUID
     let bucketItemId: UUID
@@ -53,4 +54,16 @@ class BucketItemViewModel: ViewModel {
         }
     }
     
+    func addLocation(name: String, address: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) async {
+        do {
+            _ = try await FirebaseService.shared.uploadLocationName(bucketID: bucketId, itemID: bucketItemId, name: name)
+            _ = try await FirebaseService.shared.uploadLocationAddress(bucketID: bucketId, itemID: bucketItemId, address: address)
+            _ = try await FirebaseService.shared.uploadLocationLatitude(bucketID: bucketId, itemID: bucketItemId, latitude: latitude)
+            _ = try await FirebaseService.shared.uploadLocationLongitude(bucketID: bucketId, itemID: bucketItemId, longitude: longitude)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
+
+

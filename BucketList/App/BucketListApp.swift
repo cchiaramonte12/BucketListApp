@@ -22,10 +22,15 @@ struct BucketApp: App {
     // register app delegate for Firebase setup (Copied from Firebase website)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject var locationManager = LocationManager()
+
+    
     //@ObservedObject var appState = AppState.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(locationManager)
+
         }
     }
 }
