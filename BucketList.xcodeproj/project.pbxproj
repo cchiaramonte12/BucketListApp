@@ -13,6 +13,10 @@
 		7E3B13E72AED5A640076CB37 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E62AED5A640076CB37 /* FirebaseService.swift */; };
 		7E3B13E92AED5E0F0076CB37 /* BucketListErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */; };
 		7E5606CB2AE03114001F826A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5606CA2AE03114001F826A /* MapView.swift */; };
+		7E5ED47F2AFEC21600A8D006 /* AddLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5ED47E2AFEC21600A8D006 /* AddLocationView.swift */; };
+		7E5ED4822AFEC23500A8D006 /* AddLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5ED4812AFEC23500A8D006 /* AddLocationViewModel.swift */; };
+		7E5ED4842AFEC25D00A8D006 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5ED4832AFEC25D00A8D006 /* Location.swift */; };
+		7E5ED4862AFEC39700A8D006 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5ED4852AFEC39700A8D006 /* LocationManager.swift */; };
 		7E5F330E2AD6F967000357DC /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F330D2AD6F967000357DC /* BucketListApp.swift */; };
 		7E5F33102AD6F967000357DC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F330F2AD6F967000357DC /* ContentView.swift */; };
 		7E5F33122AD6F968000357DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E5F33112AD6F968000357DC /* Assets.xcassets */; };
@@ -88,6 +92,10 @@
 		7E3B13E62AED5A640076CB37 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListErrors.swift; sourceTree = "<group>"; };
 		7E5606CA2AE03114001F826A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		7E5ED47E2AFEC21600A8D006 /* AddLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationView.swift; sourceTree = "<group>"; };
+		7E5ED4812AFEC23500A8D006 /* AddLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewModel.swift; sourceTree = "<group>"; };
+		7E5ED4832AFEC25D00A8D006 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		7E5ED4852AFEC39700A8D006 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7E5F330A2AD6F967000357DC /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5F330D2AD6F967000357DC /* BucketListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListApp.swift; sourceTree = "<group>"; };
 		7E5F330F2AD6F967000357DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -217,6 +225,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7E5ED47C2AFEC20800A8D006 /* AddLocation */ = {
+			isa = PBXGroup;
+			children = (
+				7E5ED47D2AFEC20F00A8D006 /* View */,
+				7E5ED4802AFEC22C00A8D006 /* ViewModel */,
+			);
+			path = AddLocation;
+			sourceTree = "<group>";
+		};
+		7E5ED47D2AFEC20F00A8D006 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E5ED47E2AFEC21600A8D006 /* AddLocationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7E5ED4802AFEC22C00A8D006 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7E5ED4812AFEC23500A8D006 /* AddLocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7E5F33012AD6F967000357DC = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA3ACBF2ADD704200B40EFC /* AddItem */,
+				7E5ED47C2AFEC20800A8D006 /* AddLocation */,
 				7E5F33562AD6FB0E000357DC /* Authentication */,
 				7E5F33892AD72147000357DC /* Bucket */,
 				7E5F33832AD71EB9000357DC /* BucketCard */,
@@ -330,6 +364,7 @@
 				7EF32B892AD9E2BF0059FE7A /* NavigationPathContainer.swift */,
 				7E8BE2672ADD8AFC000124BB /* UserService.swift */,
 				7E3B13E62AED5A640076CB37 /* FirebaseService.swift */,
+				7E5ED4852AFEC39700A8D006 /* LocationManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -341,6 +376,7 @@
 				7E5F33872AD71EE6000357DC /* BucketItem.swift */,
 				7E8BE2652ADD8804000124BB /* User.swift */,
 				7EFE4B732AE0AC8400A13A53 /* ItemToggleStyle.swift */,
+				7E5ED4832AFEC25D00A8D006 /* Location.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -710,8 +746,10 @@
 				7E5F33822AD71784000357DC /* Bucket.swift in Sources */,
 				7EF32B6E2AD8B96B0059FE7A /* CreateBucketView.swift in Sources */,
 				7EF32B972AD9F82E0059FE7A /* CreateBucketViewModel.swift in Sources */,
+				7E5ED4822AFEC23500A8D006 /* AddLocationViewModel.swift in Sources */,
 				7E5F33692AD6FBF9000357DC /* LogInView.swift in Sources */,
 				7E5F33722AD6FC60000357DC /* HomeView.swift in Sources */,
+				7E5ED47F2AFEC21600A8D006 /* AddLocationView.swift in Sources */,
 				7E5F33782AD70676000357DC /* LogInViewModel.swift in Sources */,
 				7E069B272AF148DB0031A3A7 /* NoBucketsView.swift in Sources */,
 				7E5606CB2AE03114001F826A /* MapView.swift in Sources */,
@@ -719,6 +757,8 @@
 				7EFE4B742AE0AC8400A13A53 /* ItemToggleStyle.swift in Sources */,
 				7EA3ACC22ADD705200B40EFC /* AddItemView.swift in Sources */,
 				7EF32B902AD9E3CE0059FE7A /* NavigationDestination.swift in Sources */,
+				7E5ED4862AFEC39700A8D006 /* LocationManager.swift in Sources */,
+				7E5ED4842AFEC25D00A8D006 /* Location.swift in Sources */,
 				7E5F335D2AD6FB5C000357DC /* AppState.swift in Sources */,
 				7E5F33882AD71EE6000357DC /* BucketItem.swift in Sources */,
 				7E5F33802AD71541000357DC /* BucketCardView.swift in Sources */,

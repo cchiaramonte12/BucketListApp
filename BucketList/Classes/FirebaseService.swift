@@ -11,6 +11,7 @@ import Firebase
 import Combine
 import FirebaseStorage
 import SwiftUI
+import MapKit
 
 class FirebaseService: ObservableObject {
     private init() { }
@@ -136,6 +137,38 @@ class FirebaseService: ObservableObject {
             throw BucketListErrors.firebaseReferenceInvalid
         }
         return await FirebaseService.updateFieldOnDocument(docref: reference, field: "color", value: color)
+    }
+    
+    func uploadLocationName(bucketID: UUID, itemID: UUID, name: String) async throws -> Result<String, any Error> {
+        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "locationName", value: name)
+    }
+    
+    func uploadLocationAddress(bucketID: UUID, itemID: UUID, address: String) async throws -> Result<String, any Error> {
+        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "locationAddress", value: address)
+    }
+    
+    func uploadLocationLongitude(bucketID: UUID, itemID: UUID, longitude: CLLocationDegrees) async throws -> Result<CLLocationDegrees, any Error> {
+        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "longitude", value: longitude)
+    }
+    
+    func uploadLocationLatitude(bucketID: UUID, itemID: UUID, latitude: CLLocationDegrees) async throws -> Result<CLLocationDegrees, any Error> {
+        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
+            throw BucketListErrors.firebaseReferenceInvalid
+        }
+        
+        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "latitude", value: latitude)
     }
     
 }

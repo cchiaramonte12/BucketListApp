@@ -10,10 +10,21 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct BucketItem: Identifiable, Hashable, Codable {
+    
+    static func == (lhs: BucketItem, rhs: BucketItem) -> Bool {
+        return lhs.id == rhs.id
+    }
 
+    // Manual Hashable conformance
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    
     var id: UUID
     let title: String
     var isCompleted: Bool
+    var location: Location?
     
 }
 
