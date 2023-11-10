@@ -14,7 +14,11 @@ struct CreateBucketView: View {
     
     @StateObject var viewModel: CreateBucketViewModel
     
+    @State private var dummyColor: Color? = nil
+    @State private var dummyString: String? = nil
+    
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 4) {
             
             //only show x if there is text and remove text on button click
@@ -67,6 +71,24 @@ struct CreateBucketView: View {
                 }
             }
             
+            
+            TextField("Notes", text: .init($dummyString, replacingNilWith: ""))
+            ColorPicker("Pick a Color", selection: $viewModel.color)
+                .fontWeight(.semibold)
+                .padding()
+            
+            ColorPicker("Pick a Color -- Test", selection: .init($dummyColor, replacingNilWith: .black, setNilWhenProxyChosen: true))
+                .fontWeight(.semibold)
+                .padding()
+            
+            
+            OptionalColorPicker(boundColor: $dummyColor)
+            Rectangle()
+                .frame(height: 50)
+                .foregroundColor(viewModel.color)
+                .cornerRadius(20)
+                .padding()
+            
             Button(action: {
                 Task { 
                     try await viewModel.uploadBucket()
@@ -104,5 +126,37 @@ struct CreateBucketView: View {
             }
         }
         .padding()
+    }
+}
+
+
+struct OptionalColorPicker: View {
+    
+    init(boundColor: Binding<Color?>,
+         defaultColor: Color = .black) {
+        self.color = boundColor.wrappedValue ?? defaultColor
+        _boundColor = boundColor
+    }
+    
+    @Binding var boundColor: Color?
+    @State var color: Color
+    var body: some View {
+        ColorPicker("Some Title", selection: $color)
+            .onChange(of: color) {
+                self.boundColor = color
+            }
+    }
+}
+
+public extension Binding where Value: Equatable {
+    init(_ source: Binding<Value?>, replacingNilWith nilProxy: Value, setNilWhenProxyChosen: Bool = true) {
+        self.init(
+            get: { source.wrappedValue ?? nilProxy },
+            set: { newValue in
+                if newValue == nilProxy,
+                setNilWhenProxyChosen { source.wrappedValue = nil }
+                else { source.wrappedValue = newValue }
+            }
+        )
     }
 }

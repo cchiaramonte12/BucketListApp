@@ -10,7 +10,9 @@ import SwiftUI
 struct AddItemView: View {
     let bucketId: UUID
     let actionAfterAddedItem: () -> Void
+    
     @State private var title = ""
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
