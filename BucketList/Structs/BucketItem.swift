@@ -13,6 +13,5 @@ struct BucketItem: Identifiable, Hashable, Codable {
 
     var id: UUID
     let title: String
-    var isCompleted: Bool
-    
+    var isCompleted: Bool    
 }

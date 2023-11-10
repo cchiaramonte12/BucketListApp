@@ -13,18 +13,29 @@ struct AddLocationView: View {
     
     @StateObject var viewModel: AddLocationViewModel
     
+    @State private var searchText = ""
+    
+    @Binding var returnedLocation: Location
+    
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        VStack {
-            
-            List(viewModel.locations) { location in
-                VStack(alignment: .leading) {
-                    Text(location.name)
-                        .font(.title2)
-                    Text(location.address)
-                        .font(.callout)
-                }
+        List(viewModel.locations) { location in
+            VStack(alignment: .leading) {
+                Text(location.name)
+                    .font(.title2)
+                Text(location.address)
+                    .font(.callout)
             }
-            .listStyle(.plain)
+            .onTapGesture {
+                returnedLocation = location
+                dismiss()
+            }
         }
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { oldValue, newValue in
+            viewModel.search(text: newValue, region: locationManager.region)
+        }
+        .listStyle(.plain)
     }
 }

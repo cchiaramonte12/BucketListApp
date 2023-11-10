@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct AddItemView: View {
+    
     let bucketId: UUID
+    
     let actionAfterAddedItem: () -> Void
+    
     @State private var title = ""
     
+    @State var returnedLocation = Location(mapItem: MKMapItem())
+    
     @EnvironmentObject var locationManager: LocationManager
-    
-    @State private var searchText = ""
-
-    @StateObject var addLocationViewModel: AddLocationViewModel
-    
+        
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -30,7 +32,7 @@ struct AddItemView: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                 
-                NavigationLink(value: NavigationDestination.addLocation,
+                NavigationLink(destination: AddLocationView(viewModel: AddLocationViewModel(), returnedLocation: $returnedLocation),
                                label: {
                     Text("Add a Location to this Item")
                         .font(.subheadline)
@@ -40,10 +42,6 @@ struct AddItemView: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
                 })
-                .searchable(text: $searchText)
-                .onChange(of: searchText) { oldValue, newValue in
-                    addLocationViewModel.search(text: newValue, region: locationManager.region)
-                }
                 
                 Button(action: {
                     Task {
@@ -65,6 +63,8 @@ struct AddItemView: View {
                         .background(Color(hex: "398378"))
                         .cornerRadius(10)
                 })
+                
+                Text("Returned Place: \nName: \(returnedLocation.name)\nAddr: \(returnedLocation.address) \nCoords: \(returnedLocation.latitude), \(returnedLocation.longitude)")
             }
             .padding(14)
         }
