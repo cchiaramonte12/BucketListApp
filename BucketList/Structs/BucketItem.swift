@@ -16,3 +16,9 @@ struct BucketItem: Identifiable, Hashable, Codable {
     var isCompleted: Bool
     
 }
+
+extension BucketItem: FirebaseSafe {
+    var dehydratedObject: BucketItem {
+        self
+    }
+}

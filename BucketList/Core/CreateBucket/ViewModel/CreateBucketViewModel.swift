@@ -17,14 +17,13 @@ class CreateBucketViewModel: ObservableObject {
     @Published var title = ""
     @Published var description = ""
     @Published var headerImageUrl = ""
-    @Published var items = [BucketItem]()
     @Published var id = UUID()
     
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { await loadImage() } }
     }
     
-    @Published var color: Color?
+    @Published var color: Color = Color.black
     
     @Published var headerImage: Image?
     
@@ -40,7 +39,7 @@ class CreateBucketViewModel: ObservableObject {
     }
     
     func uploadBucket() async throws {
-        let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageUrl: headerImageUrl.isEmpty ? nil : "", items: items)
+        let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageUrl: headerImageUrl.isEmpty ? nil : "")
         try await FirebaseService.shared.uploadBucket(bucket)
         try await updateHeaderImage(id: bucket.id)
         try await updateColor(id: bucket.id)
@@ -58,7 +57,6 @@ class CreateBucketViewModel: ObservableObject {
     }
     
     private func updateColor(id: UUID) async throws {
-        guard let color = self.color else { return }
         do {
             let res = try await FirebaseService.shared.uploadColor(color: color.toHex() ?? "398378", bucketID: id)
             print(res)

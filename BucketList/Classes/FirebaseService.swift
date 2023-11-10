@@ -163,8 +163,8 @@ extension FirebaseService {
             }
         }
     
-    fileprivate static func pushObjectToDocument<T: Codable>(docref: DocumentReference, object: T) throws {
-        try docref.setData(from: object, merge: true)
+    fileprivate static func pushObjectToDocument<T: FirebaseSafe>(docref: DocumentReference, object: T) throws {
+        try docref.setData(from: object.dehydratedObject, merge: true)
     }
     
     fileprivate static func deleteDocument(documentReference: DocumentReference) async throws {
