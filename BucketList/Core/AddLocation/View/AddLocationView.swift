@@ -22,8 +22,6 @@ struct AddLocationView: View {
     
     @StateObject var bucketItemViewModel: BucketItemViewModel
     
-    let actionAfterAddedLocation: () -> Void
-    
     var body: some View {
         List(viewModel.locations) { location in
             VStack(alignment: .leading) {
@@ -37,7 +35,6 @@ struct AddLocationView: View {
                 Task {
                     do {
                         await bucketItemViewModel.addLocation(name: returnedLocation.name, address: returnedLocation.address, latitude: returnedLocation.latitude, longitude: returnedLocation.longitude)
-                        actionAfterAddedLocation()
                         dismiss()
                     }
                 }
