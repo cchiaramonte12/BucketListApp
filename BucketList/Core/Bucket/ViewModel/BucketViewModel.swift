@@ -38,7 +38,7 @@ class BucketViewModel: ViewModel {
                 self.bucket = immutableFetchedBucket
             }
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
     }
     

@@ -12,7 +12,12 @@ class BucketItemViewModel: ViewModel {
     
     @Published var bucket: Bucket?
     @Published var item: BucketItem
-    @Published var location: Location?
+//    @Published var locationName: String?
+//    @Published var locationAddress: String?
+//    @Published var latitude: String?
+//    @Published var longitude: String?
+
+    
     
     let bucketId: UUID
     let bucketItemId: UUID
@@ -61,7 +66,7 @@ class BucketItemViewModel: ViewModel {
             _ = try await FirebaseService.shared.uploadLocationLatitude(bucketID: bucketId, itemID: bucketItemId, latitude: latitude)
             _ = try await FirebaseService.shared.uploadLocationLongitude(bucketID: bucketId, itemID: bucketItemId, longitude: longitude)
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
     }
 }

@@ -22,8 +22,7 @@ struct BucketView: View {
                             .resizable()
                             .scaledToFill()
                     } placeholder: {
-                        //ProgressView()
-                        Rectangle().foregroundStyle(Color(.random))
+                        Rectangle().foregroundStyle(Color(hex: bucket.color ?? "398378"))
                     }
                     .frame(height: 150)
                     .clipped()

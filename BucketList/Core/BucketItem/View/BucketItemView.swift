@@ -33,18 +33,20 @@ struct BucketItemView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: AddLocationView(viewModel: AddLocationViewModel(), returnedLocation: $returnedLocation, bucketItemViewModel: viewModel, actionAfterAddedLocation: viewModel.refresh), label: {
+                NavigationLink(destination: AddLocationView(viewModel: AddLocationViewModel(), returnedLocation: $returnedLocation, bucketItemViewModel: viewModel), label: {
                     Image(systemName: "mappin.circle")
                         .foregroundColor(Color(hex: "398378"))
                 })
             }
             .cornerRadius(12)
             
-            if let location = viewModel.location, location.name != "Unknown Location" {
-                Text("Location: \(location.name)")
+            if let name = viewModel.item.locationName {
+                Text("Location: \(name)")
                     .font(.subheadline)
-                    .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "398378"))
+            } else {
+                Text("Add a location")
+                    .font(.footnote)
             }
         }
         .padding()

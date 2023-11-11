@@ -24,8 +24,10 @@ struct BucketItem: Identifiable, Hashable, Codable {
     var id: UUID
     let title: String
     var isCompleted: Bool
-    var location: Location?
-    
+    var locationName: String?
+    var locationAddress: String?
+    var latitude: Float?
+    var longitude: Float?
 }
 
 extension BucketItem: FirebaseSafe {

@@ -72,17 +72,17 @@ struct CreateBucketView: View {
             }
             
             
-            TextField("Notes", text: .init($dummyString, replacingNilWith: ""))
+//            TextField("Notes", text: .init($dummyString, replacingNilWith: ""))
             ColorPicker("Pick a Color", selection: $viewModel.color)
                 .fontWeight(.semibold)
                 .padding()
             
-            ColorPicker("Pick a Color -- Test", selection: .init($dummyColor, replacingNilWith: .black, setNilWhenProxyChosen: true))
-                .fontWeight(.semibold)
-                .padding()
+//            ColorPicker("Pick a Color -- Test", selection: .init($dummyColor, replacingNilWith: .black, setNilWhenProxyChosen: true))
+//                .fontWeight(.semibold)
+//                .padding()
             
             
-            OptionalColorPicker(boundColor: $dummyColor)
+//            OptionalColorPicker(boundColor: $dummyColor)
             Rectangle()
                 .frame(height: 50)
                 .foregroundColor(viewModel.color)

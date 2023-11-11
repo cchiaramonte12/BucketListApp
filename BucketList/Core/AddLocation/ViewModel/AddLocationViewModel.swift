@@ -10,7 +10,7 @@ import MapKit
 
 @MainActor
 class AddLocationViewModel: ObservableObject {
-
+    
     @Published var locations: [Location] = []
 
     func search(text: String, region: MKCoordinateRegion) {
