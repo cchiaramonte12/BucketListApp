@@ -10,7 +10,13 @@ import MapKit
 
 @MainActor
 class AddLocationViewModel: ObservableObject {
+    init(onTapAction: @escaping (Location) async -> Void, locations: [Location] = []) {
+        self.onTapAction = onTapAction
+        self.locations = locations
+    }
     
+    
+    var onTapAction: (Location) async -> Void
     @Published var locations: [Location] = []
 
     func search(text: String, region: MKCoordinateRegion) {

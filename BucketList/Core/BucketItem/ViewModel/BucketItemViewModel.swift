@@ -10,26 +10,41 @@ import MapKit
 
 class BucketItemViewModel: ViewModel {
     
-    @Published var bucket: Bucket?
-    @Published var item: BucketItem
-//    @Published var locationName: String?
-//    @Published var locationAddress: String?
-//    @Published var latitude: String?
-//    @Published var longitude: String?
-
-    
-    
-    let bucketId: UUID
-    let bucketItemId: UUID
-    
     var title: String { item.title }
     
-    init(bucket: Bucket? = nil, item: BucketItem, bucketId: UUID, bucketItemId: UUID) {
-        self.bucket = bucket
+    internal init(item: BucketItem,
+                  bucketId: UUID,
+                  onTap: @escaping (BucketItem) -> Void,
+                  bucketItemCompletionMethod: @escaping (BucketItem, Bool) async -> Void,
+                  bucketItemAddLocationMethod: @escaping (Location, UUID) async -> Void,
+                  returnedLocation: Location = Location(mapItem: MKMapItem())) {
         self.item = item
         self.bucketId = bucketId
-        self.bucketItemId = bucketItemId
+        self.onTap = onTap
+        self.bucketItemCompletionMethod = bucketItemCompletionMethod
+        self.bucketItemAddLocationMethod = bucketItemAddLocationMethod
+        self.returnedLocation = returnedLocation
     }
+    
+    
+    @Published var item: BucketItem
+    let bucketId: UUID
+    let onTap: (BucketItem) -> Void
+    private let bucketItemCompletionMethod: (BucketItem, Bool) async -> Void
+    private let bucketItemAddLocationMethod: (Location, UUID) async -> Void
+    
+    func completeBucketItem(bucketItem: BucketItem, isComplete: Bool) async {
+        await bucketItemCompletionMethod(bucketItem, isComplete)
+        await asyncRefresh()
+    }
+    
+    func addLocationToBucketItem(location: Location) async {
+        await bucketItemAddLocationMethod(location, item.id)
+        await asyncRefresh()
+    }
+    
+    @Published var returnedLocation = Location(mapItem: MKMapItem())
+    
     
     func refresh() {
         Task {
@@ -39,36 +54,16 @@ class BucketItemViewModel: ViewModel {
     
     func asyncRefresh() async {
         do {
-            var fetchedBucket = try await FirebaseService.shared.getBucket(id: bucketId)
-            let bucketItems = try await FirebaseService.shared.getBucketItems(bucketId: bucketId)
-            fetchedBucket.items = bucketItems
-            let immutableFetchedBucket = fetchedBucket
+            let bucketItem = try await FirebaseService.shared.getBucketItem(bucketId: bucketId, bucketItemId: item.id)
             await MainActor.run {
-                self.bucket = immutableFetchedBucket
+                self.item = bucketItem
             }
         } catch {
             print(error.localizedDescription)
         }
     }
     
-    func completeItem(value: Bool) async {
-        do {
-            _ = try await FirebaseService.shared.completeBucketItem(bucketID: bucketId, itemID: bucketItemId, isCompleted: value)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     
-    func addLocation(name: String, address: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) async {
-        do {
-            _ = try await FirebaseService.shared.uploadLocationName(bucketID: bucketId, itemID: bucketItemId, name: name)
-            _ = try await FirebaseService.shared.uploadLocationAddress(bucketID: bucketId, itemID: bucketItemId, address: address)
-            _ = try await FirebaseService.shared.uploadLocationLatitude(bucketID: bucketId, itemID: bucketItemId, latitude: latitude)
-            _ = try await FirebaseService.shared.uploadLocationLongitude(bucketID: bucketId, itemID: bucketItemId, longitude: longitude)
-        } catch {
-            print(error)
-        }
-    }
 }
 
 

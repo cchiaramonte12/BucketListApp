@@ -42,6 +42,25 @@ class BucketViewModel: ViewModel {
         }
     }
     
+    func completeBucketItem(item: BucketItem, isCompleted: Bool) async {
+        do {
+            _ = try await FirebaseService.shared.completeBucketItem(bucketID: bucketId, itemID: item.id, isCompleted: isCompleted)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    func addLocationToBucketItem(location: Location, bucketItemId: UUID) async {
+            do {
+                _ = try await FirebaseService.shared.uploadLocationName(bucketID: bucketId, itemID: bucketItemId, name: location.name)
+                _ = try await FirebaseService.shared.uploadLocationAddress(bucketID: bucketId, itemID: bucketItemId, address: location.address)
+                _ = try await FirebaseService.shared.uploadLocationLatitude(bucketID: bucketId, itemID: bucketItemId, latitude: location.latitude)
+                _ = try await FirebaseService.shared.uploadLocationLongitude(bucketID: bucketId, itemID: bucketItemId, longitude: location.longitude)
+            } catch {
+                print(error)
+            }
+            
+        }
+    
     func deleteBucketItem(item: BucketItem) async {
         do {
             try await FirebaseService.shared.deleteBucketItem(bucketID: bucketId, itemID: item.id)
