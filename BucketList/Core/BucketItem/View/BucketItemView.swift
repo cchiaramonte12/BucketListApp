@@ -8,35 +8,36 @@
 import SwiftUI
 import MapKit
 
-struct BucketItemView: View {
-    
+struct BucketItemCardView: View {
     @StateObject var viewModel: BucketItemViewModel
-    
-    @State var returnedLocation = Location(mapItem: MKMapItem())
-    
     @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var navigationPathContainer: NavigationPathContainer
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Toggle(isOn: $viewModel.item.isCompleted) {
-                    Text(viewModel.title)
+                    Text(viewModel.item.title)
                         .font(.headline)
                         .fontWeight(.semibold)
                 }
                 .toggleStyle(.item)
                 .onChange(of: viewModel.item.isCompleted) { oldValue, newValue in
                     Task {
-                        await viewModel.completeItem(value: newValue)
+                        await viewModel.completeBucketItem(bucketItem: viewModel.item, isComplete: newValue)
                     }
                 }
                 
                 Spacer()
                 
-                NavigationLink(destination: AddLocationView(viewModel: AddLocationViewModel(), returnedLocation: $returnedLocation, bucketItemViewModel: viewModel), label: {
+                TapButton {
+                    navigationPathContainer.path.append(NavigationDestination.addLocation(onTapAction: viewModel.addLocationToBucketItem,
+                                                                     returnedLocation: $viewModel.returnedLocation))
+                } content: {
                     Image(systemName: "mappin.circle")
                         .foregroundColor(Color(hex: "398378"))
-                })
+                }
+
             }
             .cornerRadius(12)
             

@@ -20,7 +20,7 @@ struct AddLocationView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @StateObject var bucketItemViewModel: BucketItemViewModel
+//    @StateObject var bucketItemViewModel: BucketItemViewModel
     
     var body: some View {
         List(viewModel.locations) { location in
@@ -33,8 +33,8 @@ struct AddLocationView: View {
             .onTapGesture {
                 returnedLocation = location
                 Task {
-                    do {
-                        await bucketItemViewModel.addLocation(name: returnedLocation.name, address: returnedLocation.address, latitude: returnedLocation.latitude, longitude: returnedLocation.longitude)
+                    await viewModel.onTapAction(location)
+                    await MainActor.run {
                         dismiss()
                     }
                 }

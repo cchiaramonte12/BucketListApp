@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct BucketView: View {
-    
     @StateObject var viewModel: BucketViewModel
-    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -87,11 +85,16 @@ struct BucketView: View {
                         List {
                             ForEach(items) { item in
                                 HStack {
-                                    BucketItemView(viewModel: BucketItemViewModel(item: item, bucketId: viewModel.bucketId, bucketItemId: item.id))
-                                        .swipeActions() {
-                                            Button(role: .destructive) {
-                                                Task {
-                                                    await viewModel.deleteBucketItem(item: item)
+                                    BucketItemCardView(viewModel: BucketItemViewModel(item: item,
+                                                                                      bucketId: viewModel.bucketId,
+                                                                                      onTap: { item in },
+                                                                                      bucketItemCompletionMethod: viewModel.completeBucketItem,
+                                                                                      bucketItemAddLocationMethod: viewModel.addLocationToBucketItem)
+                                    )
+                                    .swipeActions() {
+                                        Button(role: .destructive) {
+                                            Task {
+                                                await viewModel.deleteBucketItem(item: item)
                                                 }
                                             } label: {
                                                 Text("Delete")
@@ -103,6 +106,7 @@ struct BucketView: View {
                                 
                             }
                         }
+                        .listStyle(.plain)
                     } else {
                         HStack {
                             Spacer()
@@ -142,3 +146,16 @@ func getRandomColor() -> UIColor {
     
     return UIColor(red:red, green: green, blue: blue, alpha: 1.0)
 }
+
+struct TapButton<V: View>: View {
+    var action: () -> Void
+    @ViewBuilder var content: () -> V
+    
+    var body: some View {
+        content()
+            .onTapGesture {
+                action()
+            }
+    }
+}
+
