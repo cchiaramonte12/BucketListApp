@@ -40,3 +40,9 @@ extension Bucket: FirebaseSafe {
         .init(id: id, title: title, date: date, description: description, headerImageUrl: headerImageUrl, color: color)
     }
 }
+
+extension Array where Element == Bucket {
+    var items: [BucketItem] {
+        self.flatMap{$0.items ?? []}
+    }
+}

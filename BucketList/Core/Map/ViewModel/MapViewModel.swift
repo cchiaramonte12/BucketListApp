@@ -24,6 +24,20 @@ class MapViewModel: ViewModel {
         }
     }
     
+//    var items: [(item: BucketItem, lat: Float, long: Float)] {
+//        let validItems = buckets?.items.compactMap {item -> (item: BucketItem, lat: Float, long: Float)? in
+//            guard let lat = item.latitude,
+//                  let long = item.longitude else { return nil }
+//                    return (item, lat, long)
+//        }
+//        
+//        return validItems ?? []
+//    }
+//    
+    var items: [BucketItem] {
+        buckets?.items ?? []
+    }
+    
     func asyncRefresh() async {
         do {
             let buckets = try await FirebaseService.shared.getBuckets()

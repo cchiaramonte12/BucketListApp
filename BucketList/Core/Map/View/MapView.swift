@@ -19,17 +19,23 @@ struct MapView: View {
     var body: some View {
         Map(position: $position) {
             UserAnnotation()
-            if let buckets = viewModel.buckets {
-                           for bucket in buckets {
-                               if let items = bucket.items {
-                                   for item in items {
-                                       Marker(coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)) {
-                                           Text(item.title)
-                                       }
-                                   }
-                               }
-                           }
-                       }
+            
+            let items: [BucketItem] = viewModel.items
+            
+            ForEach(items) {item in
+                if let lat = item.latitude {
+                    Marker(coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)) {
+                        Text("")
+                    }
+                }
+                
+            }
+            
+//            if let buckets = viewModel.buckets {
+//                ForEach(buckets.items) {item in
+                    
+//                }
+//            }
         }
         .mapControls {
             MapCompass()
