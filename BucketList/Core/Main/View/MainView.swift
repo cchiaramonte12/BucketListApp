@@ -19,7 +19,7 @@ struct MainView: View {
             ) }
             
             NewStack { _ in
-                MapView(viewModel: .init(searchText: "", results: [], title: ""))
+                MapView(viewModel: .init())
             }
             .tabItem { Label (
                 title: { Text("Map") },
