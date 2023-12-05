@@ -11,32 +11,54 @@ import MapKit
 struct MapView: View {
     
     @EnvironmentObject var locationManager: LocationManager
-        
+    
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
     
     @StateObject var viewModel: MapViewModel
     
     var body: some View {
-        Map(position: $position) {
+        Map(position: $position, selection: $viewModel.mapSelection) {
+            
             UserAnnotation()
             
-            let items: [BucketItem] = viewModel.items
-            
-            ForEach(items) {item in
-                if let lat = item.latitude {
-                    Marker(coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)) {
-                        Text("")
+            ForEach(viewModel.items) {item in
+                if let lat = item.latitude,
+                   let long = item.longitude {
+                    Marker(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat),
+                                                              longitude: CLLocationDegrees(long))) {
+                        Text(item.title)
                     }
                 }
-                
             }
-            
-//            if let buckets = viewModel.buckets {
-//                ForEach(buckets.items) {item in
-                    
-//                }
-//            }
+            if let route = viewModel.route {
+                MapPolyline(route.polyline)
+                    .stroke(.blue, lineWidth: 6)
+            }
         }
+        .onChange(of: viewModel.getDirections, { oldValue, newValue in
+            if newValue {
+                Task {
+                    await viewModel.fetchRoute()
+                    withAnimation(.snappy) {
+                        viewModel.routeDisplaying = true
+                        viewModel.showDetails = false
+                        
+                        if let rect = viewModel.route?.polyline.boundingMapRect, viewModel.routeDisplaying {
+                            position = .rect(rect)
+                        }
+                    }
+                }
+            }
+        })
+        .onChange(of: viewModel.mapSelection, { oldValue, newValue in
+            viewModel.showDetails = newValue != nil
+        })
+        .sheet(isPresented: $viewModel.showDetails, content: {
+            MapItemDetailsView(mapSelection: $viewModel.mapSelection, show: $viewModel.showDetails, getDirections: $viewModel.getDirections)
+                .presentationDetents([.height(340)])
+                .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
+                .presentationCornerRadius(12)
+        })
         .mapControls {
             MapCompass()
             MapPitchToggle()
@@ -44,6 +66,8 @@ struct MapView: View {
         }
         .onAppear {
             CLLocationManager().requestWhenInUseAuthorization()
+            viewModel.refresh()
         }
     }
 }
+

@@ -10,12 +10,32 @@ import MapKit
 
 class MapViewModel: ViewModel {
     
+    
+    
     var title: String { "Map" }
     
     @Published var buckets: [Bucket]?
+                
+    @Published var mapSelection: MKMapItem?
     
-    init() {
-        refresh()
+    @Published var showDetails = false
+    
+    @Published var getDirections = false
+    
+    @Published var routeDisplaying = false
+    
+    @Published var route: MKRoute?
+    
+    @Published var routeDestination: MKMapItem?
+    
+    init(buckets: [Bucket]? = nil, mapSelection: MKMapItem? = nil, showDetails: Bool = false, getDirections: Bool = false, routeDisplaying: Bool = false, route: MKRoute? = nil, routeDestination: MKMapItem? = nil) {
+        self.buckets = buckets
+        self.mapSelection = mapSelection
+        self.showDetails = showDetails
+        self.getDirections = getDirections
+        self.routeDisplaying = routeDisplaying
+        self.route = route
+        self.routeDestination = routeDestination
     }
     
     func refresh() {
@@ -24,36 +44,48 @@ class MapViewModel: ViewModel {
         }
     }
     
-//    var items: [(item: BucketItem, lat: Float, long: Float)] {
-//        let validItems = buckets?.items.compactMap {item -> (item: BucketItem, lat: Float, long: Float)? in
-//            guard let lat = item.latitude,
-//                  let long = item.longitude else { return nil }
-//                    return (item, lat, long)
-//        }
-//        
-//        return validItems ?? []
-//    }
-//    
     var items: [BucketItem] {
         buckets?.items ?? []
     }
     
     func asyncRefresh() async {
         do {
-            let buckets = try await FirebaseService.shared.getBuckets()
-//            var itemsArray: [[BucketItem]] = []
-//
-//            for bucket in buckets {
-//                let items = try await FirebaseService.shared.getBucketItems(bucketId: bucket.id)
-//                itemsArray.append(items)
-//            }
+            let buckets = try await FirebaseService.shared.getBuckets().asyncMap { try await $0.withItems() }
             
             await MainActor.run {
                 self.buckets = buckets
-//                self.items = items
             }
         } catch {
             print(error.localizedDescription)
         }
     }
+    
+    @MainActor
+    func fetchRoute() async {
+        if let mapSelection {
+            let request = MKDirections.Request()
+            request.source = MKMapItem(placemark: .init(coordinate: CLLocationCoordinate2D()))
+            request.destination = mapSelection
+            
+            let result = try? await MKDirections(request: request).calculate()
+            route = result?.routes.first
+            routeDestination = mapSelection
+        }
+    }
 }
+
+extension Sequence {
+    func asyncMap<T>(
+        _ transform: (Element) async throws -> T
+    ) async rethrows -> [T] {
+        var values = [T]()
+
+        for element in self {
+            try await values.append(transform(element))
+        }
+
+        return values
+    }
+}
+
+
