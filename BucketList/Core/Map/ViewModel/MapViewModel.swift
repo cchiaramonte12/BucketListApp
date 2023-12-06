@@ -36,8 +36,16 @@ class MapViewModel: ViewModel {
         }
     }
     
-    var items: [BucketItem] {
-        buckets?.items ?? []
+    var mapItems: [MKMapItem] {
+        buckets?.items.compactMap{item -> MKMapItem? in
+            guard let lat = item.latitude,
+               let long = item.longitude else {
+                return nil
+            }
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))))
+            mapItem.name = item.title
+            return mapItem
+        } ?? []
     }
     
     func asyncRefresh() async {
@@ -49,19 +57,6 @@ class MapViewModel: ViewModel {
             }
         } catch {
             print(error.localizedDescription)
-        }
-    }
-    
-    @MainActor
-    func fetchRoute() async {
-        if let mapSelection {
-            let request = MKDirections.Request()
-            request.source = MKMapItem(placemark: .init(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(items[0].latitude ?? 0.0), longitude: CLLocationDegrees(items[0].longitude ?? 0.0))))
-            request.destination = mapSelection
-            
-            let result = try? await MKDirections(request: request).calculate()
-            route = result?.routes.first
-            routeDestination = mapSelection
         }
     }
 }

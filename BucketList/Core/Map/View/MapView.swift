@@ -21,17 +21,9 @@ struct MapView: View {
             
             UserAnnotation()
                         
-            ForEach(viewModel.items, id: \.self) { item in
-                if let lat = item.latitude,
-                   let long = item.longitude {
-                    let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))))
-                    let placemark = mapItem.placemark
-                    //                    Marker(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat),
-                    //                                                              longitude: CLLocationDegrees(long))) {
-                    //                        Text(item.title)
-                    //                    }
-                    Marker(item.title, coordinate: placemark.coordinate)
-                }
+            ForEach(viewModel.mapItems, id: \.self) { item in
+                Marker(item.name ?? "", coordinate: item.placemark.coordinate)
+                
             }
         }
         .onChange(of: viewModel.mapSelection, { oldValue, newValue in
