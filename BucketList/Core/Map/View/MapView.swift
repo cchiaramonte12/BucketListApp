@@ -13,43 +13,27 @@ struct MapView: View {
     @EnvironmentObject var locationManager: LocationManager
     
     @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
-    
+        
     @StateObject var viewModel: MapViewModel
-    
+                    
     var body: some View {
         Map(position: $position, selection: $viewModel.mapSelection) {
             
             UserAnnotation()
-            
-            ForEach(viewModel.items) {item in
+                        
+            ForEach(viewModel.items, id: \.self) { item in
                 if let lat = item.latitude,
                    let long = item.longitude {
-                    Marker(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat),
-                                                              longitude: CLLocationDegrees(long))) {
-                        Text(item.title)
-                    }
+                    let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))))
+                    let placemark = mapItem.placemark
+                    //                    Marker(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat),
+                    //                                                              longitude: CLLocationDegrees(long))) {
+                    //                        Text(item.title)
+                    //                    }
+                    Marker(item.title, coordinate: placemark.coordinate)
                 }
-            }
-            if let route = viewModel.route {
-                MapPolyline(route.polyline)
-                    .stroke(.blue, lineWidth: 6)
             }
         }
-        .onChange(of: viewModel.getDirections, { oldValue, newValue in
-            if newValue {
-                Task {
-                    await viewModel.fetchRoute()
-                    withAnimation(.snappy) {
-                        viewModel.routeDisplaying = true
-                        viewModel.showDetails = false
-                        
-                        if let rect = viewModel.route?.polyline.boundingMapRect, viewModel.routeDisplaying {
-                            position = .rect(rect)
-                        }
-                    }
-                }
-            }
-        })
         .onChange(of: viewModel.mapSelection, { oldValue, newValue in
             viewModel.showDetails = newValue != nil
         })
@@ -70,4 +54,3 @@ struct MapView: View {
         }
     }
 }
-

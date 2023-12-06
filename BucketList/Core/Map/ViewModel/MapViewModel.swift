@@ -10,8 +10,6 @@ import MapKit
 
 class MapViewModel: ViewModel {
     
-    
-    
     var title: String { "Map" }
     
     @Published var buckets: [Bucket]?
@@ -27,15 +25,9 @@ class MapViewModel: ViewModel {
     @Published var route: MKRoute?
     
     @Published var routeDestination: MKMapItem?
-    
-    init(buckets: [Bucket]? = nil, mapSelection: MKMapItem? = nil, showDetails: Bool = false, getDirections: Bool = false, routeDisplaying: Bool = false, route: MKRoute? = nil, routeDestination: MKMapItem? = nil) {
-        self.buckets = buckets
-        self.mapSelection = mapSelection
-        self.showDetails = showDetails
-        self.getDirections = getDirections
-        self.routeDisplaying = routeDisplaying
-        self.route = route
-        self.routeDestination = routeDestination
+                    
+    init() {
+        refresh()
     }
     
     func refresh() {
@@ -64,7 +56,7 @@ class MapViewModel: ViewModel {
     func fetchRoute() async {
         if let mapSelection {
             let request = MKDirections.Request()
-            request.source = MKMapItem(placemark: .init(coordinate: CLLocationCoordinate2D()))
+            request.source = MKMapItem(placemark: .init(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(items[0].latitude ?? 0.0), longitude: CLLocationDegrees(items[0].longitude ?? 0.0))))
             request.destination = mapSelection
             
             let result = try? await MKDirections(request: request).calculate()
@@ -87,5 +79,3 @@ extension Sequence {
         return values
     }
 }
-
-
