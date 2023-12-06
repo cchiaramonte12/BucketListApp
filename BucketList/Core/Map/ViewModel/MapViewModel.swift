@@ -59,6 +59,19 @@ class MapViewModel: ViewModel {
             print(error.localizedDescription)
         }
     }
+    
+    @MainActor
+    func fetchRoute() async {
+        if let mapSelection {
+            let request = MKDirections.Request()
+            request.source = mapItems[0]
+            request.destination = mapSelection
+            
+            let result = try? await MKDirections(request: request).calculate()
+            route = result?.routes.first
+            routeDestination = mapSelection
+        }
+    }
 }
 
 extension Sequence {
