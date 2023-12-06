@@ -64,7 +64,7 @@ class MapViewModel: ViewModel {
     func fetchRoute() async {
         if let mapSelection {
             let request = MKDirections.Request()
-            request.source = mapItems[0]
+            request.source = .forCurrentLocation()
             request.destination = mapSelection
             
             let result = try? await MKDirections(request: request).calculate()
