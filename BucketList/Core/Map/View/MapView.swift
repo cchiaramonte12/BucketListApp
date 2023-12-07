@@ -20,12 +20,40 @@ struct MapView: View {
         Map(position: $position, selection: $viewModel.mapSelection) {
             
             UserAnnotation()
-                        
+            
             ForEach(viewModel.mapItems, id: \.self) { item in
-                Marker(item.name ?? "", coordinate: item.placemark.coordinate)
-                
+                if viewModel.routeDisplaying {
+                    if item == viewModel.routeDestination {
+                        let placemark = item.placemark
+                        Marker(placemark.name ?? "", coordinate: placemark.coordinate)
+                    }
+                } else {
+                    let placemark = item.placemark
+                    Marker(placemark.name ?? "", coordinate: placemark.coordinate)
+                }
+            }
+//            ForEach(viewModel.mapItems, id: \.self) { item in
+//                Marker(item.name ?? "", coordinate: item.placemark.coordinate)
+//            }
+            if let route = viewModel.route {
+                MapPolyline(route.polyline)
+                    .stroke(.blue, lineWidth: 6)
             }
         }
+        .onChange(of: viewModel.getDirections, { oldValue, newValue in
+            if newValue {
+                Task {
+                    await viewModel.fetchRoute()
+                    withAnimation(.snappy) {
+                        viewModel.routeDisplaying = true
+                        viewModel.showDetails = false
+                        if let rect = viewModel.route?.polyline.boundingMapRect, viewModel.routeDisplaying {
+                            position = .rect(rect)
+                        }
+                    }
+                }
+            }
+        })
         .onChange(of: viewModel.mapSelection, { oldValue, newValue in
             viewModel.showDetails = newValue != nil
         })
