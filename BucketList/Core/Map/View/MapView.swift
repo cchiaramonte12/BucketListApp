@@ -10,30 +10,18 @@ import MapKit
 
 struct MapView: View {
     
-    @State private var cameraPosition: MapCameraPosition = .region(.userRegion)
+    @EnvironmentObject var locationManager: LocationManager
     
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+        
     @StateObject var viewModel: MapViewModel
-    
-//    @State private var searchText = ""
-//    
-//    @State private var results: [MKMapItem]
-    
+                    
     var body: some View {
-        Map(position: $cameraPosition, selection: $viewModel.mapSelection) {
-            Annotation("", coordinate: .userLocation) {
-                ZStack {
-                    Circle()
-                        .frame(width: 32, height: 32)
-                        .foregroundStyle(.blue.opacity(0.25))
-                    Circle()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(.white)
-                    Circle()
-                        .frame(width: 12, height: 12)
-                        .foregroundStyle(.blue)
-                }
-            }
-            ForEach(viewModel.results, id: \.self) { item in
+        Map(position: $position, selection: $viewModel.mapSelection) {
+            
+            UserAnnotation()
+            
+            ForEach(viewModel.mapItems, id: \.self) { item in
                 if viewModel.routeDisplaying {
                     if item == viewModel.routeDestination {
                         let placemark = item.placemark
@@ -44,22 +32,13 @@ struct MapView: View {
                     Marker(placemark.name ?? "", coordinate: placemark.coordinate)
                 }
             }
-            
+//            ForEach(viewModel.mapItems, id: \.self) { item in
+//                Marker(item.name ?? "", coordinate: item.placemark.coordinate)
+//            }
             if let route = viewModel.route {
                 MapPolyline(route.polyline)
                     .stroke(.blue, lineWidth: 6)
             }
-        }
-        .overlay(alignment: .top) {
-            TextField("Search for a location...", text: $viewModel.searchText)
-                .font(.subheadline)
-                .padding(12)
-                .background(.white)
-                .padding()
-                .shadow(radius: 10)
-        }
-        .onSubmit(of: .text) {
-            Task { await viewModel.searchPlaces() }
         }
         .onChange(of: viewModel.getDirections, { oldValue, newValue in
             if newValue {
@@ -68,9 +47,8 @@ struct MapView: View {
                     withAnimation(.snappy) {
                         viewModel.routeDisplaying = true
                         viewModel.showDetails = false
-                        
                         if let rect = viewModel.route?.polyline.boundingMapRect, viewModel.routeDisplaying {
-                            cameraPosition = .rect(rect)
+                            position = .rect(rect)
                         }
                     }
                 }
@@ -90,19 +68,9 @@ struct MapView: View {
             MapPitchToggle()
             MapUserLocationButton()
         }
-    }
-}
-
-extension CLLocationCoordinate2D {
-    static var userLocation: CLLocationCoordinate2D {
-        return .init(latitude: 37.7749, longitude: -122.4194)
-    }
-}
-
-extension MKCoordinateRegion {
-    static var userRegion: MKCoordinateRegion {
-        return .init(center: .userLocation,
-                     latitudinalMeters: 10000,
-                     longitudinalMeters: 10000)
+        .onAppear {
+            CLLocationManager().requestWhenInUseAuthorization()
+            viewModel.refresh()
+        }
     }
 }

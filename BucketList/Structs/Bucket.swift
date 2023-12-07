@@ -35,8 +35,23 @@ struct Bucket: Identifiable, Hashable, Codable {
     
 }
 
+extension Bucket {
+    func withItems() async throws -> Bucket {
+        var newBucket = self
+        let bucketItems = try await FirebaseService.shared.getBucketItems(bucketId: self.id)
+        newBucket.items = bucketItems
+        return newBucket
+    }
+}
+
 extension Bucket: FirebaseSafe {
     var dehydratedObject: Bucket {
         .init(id: id, title: title, date: date, description: description, headerImageUrl: headerImageUrl, color: color)
+    }
+}
+
+extension Array where Element == Bucket {
+    var items: [BucketItem] {
+        self.flatMap{$0.items ?? []}
     }
 }

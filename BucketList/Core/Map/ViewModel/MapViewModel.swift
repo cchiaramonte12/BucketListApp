@@ -10,12 +10,10 @@ import MapKit
 
 class MapViewModel: ViewModel {
     
-    @Published var searchText: String
-    
-    @Published var results: [MKMapItem]
+    var title: String { "Map" }
     
     @Published var buckets: [Bucket]?
-    
+                
     @Published var mapSelection: MKMapItem?
     
     @Published var showDetails = false
@@ -27,14 +25,9 @@ class MapViewModel: ViewModel {
     @Published var route: MKRoute?
     
     @Published var routeDestination: MKMapItem?
-    
-    
-    
-    var title: String { "Map" }
-    
-    init(searchText: String, results: [MKMapItem], title: String) {
-        self.searchText = searchText
-        self.results = results
+                    
+    init() {
+        refresh()
     }
     
     func refresh() {
@@ -43,9 +36,21 @@ class MapViewModel: ViewModel {
         }
     }
     
+    var mapItems: [MKMapItem] {
+        buckets?.items.compactMap{item -> MKMapItem? in
+            guard let lat = item.latitude,
+               let long = item.longitude else {
+                return nil
+            }
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))))
+            mapItem.name = item.title
+            return mapItem
+        } ?? []
+    }
+    
     func asyncRefresh() async {
         do {
-            let buckets = try await FirebaseService.shared.getBuckets()
+            let buckets = try await FirebaseService.shared.getBuckets().asyncMap { try await $0.withItems() }
             
             await MainActor.run {
                 self.buckets = buckets
@@ -56,24 +61,29 @@ class MapViewModel: ViewModel {
     }
     
     @MainActor
-    func searchPlaces() async {
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = searchText
-        request.region = .userRegion
-        let results = try? await MKLocalSearch(request: request).start()
-        self.results = results?.mapItems ?? []
-    }
-    
-    @MainActor
     func fetchRoute() async {
         if let mapSelection {
             let request = MKDirections.Request()
-            request.source = MKMapItem(placemark: .init(coordinate: .userLocation))
+            request.source = .forCurrentLocation()
             request.destination = mapSelection
             
             let result = try? await MKDirections(request: request).calculate()
             route = result?.routes.first
             routeDestination = mapSelection
         }
+    }
+}
+
+extension Sequence {
+    func asyncMap<T>(
+        _ transform: (Element) async throws -> T
+    ) async rethrows -> [T] {
+        var values = [T]()
+
+        for element in self {
+            try await values.append(transform(element))
+        }
+
+        return values
     }
 }

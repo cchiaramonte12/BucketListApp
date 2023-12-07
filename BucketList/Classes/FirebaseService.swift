@@ -139,6 +139,13 @@ class FirebaseService: ObservableObject {
         return await FirebaseService.updateFieldOnDocument(docref: reference, field: "color", value: color)
     }
     
+//    func uploadLocation(bucketID: UUID, itemID: UUID, location: Location) async throws -> Result<Location, any Error> {
+//        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
+//            throw BucketListErrors.firebaseReferenceInvalid
+//        }
+//        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "location", value: location)
+//    }
+    
     func uploadLocationName(bucketID: UUID, itemID: UUID, name: String) async throws -> Result<String, any Error> {
         guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
             throw BucketListErrors.firebaseReferenceInvalid

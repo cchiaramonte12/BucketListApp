@@ -51,6 +51,7 @@ class BucketViewModel: ViewModel {
     }
     func addLocationToBucketItem(location: Location, bucketItemId: UUID) async {
             do {
+//                _ = try await FirebaseService.shared.uploadLocation(bucketID: bucketId, itemID: bucketItemId, location: location)
                 _ = try await FirebaseService.shared.uploadLocationName(bucketID: bucketId, itemID: bucketItemId, name: location.name)
                 _ = try await FirebaseService.shared.uploadLocationAddress(bucketID: bucketId, itemID: bucketItemId, address: location.address)
                 _ = try await FirebaseService.shared.uploadLocationLatitude(bucketID: bucketId, itemID: bucketItemId, latitude: location.latitude)
