@@ -41,7 +41,6 @@ class FirebaseService: ObservableObject {
         
         return try await FirebaseService.documentToObject(reference: reference,
                                                           type: Bucket.self)
-        
     }
     
     func getBucketItem(bucketId: UUID, bucketItemId: UUID) async throws -> BucketItem {
@@ -59,7 +58,6 @@ class FirebaseService: ObservableObject {
         
         return try await FirebaseService.collectionToObjects(reference: reference,
                                                              type: Bucket.self)
-        
     }
     
     func getBucketItems(bucketId: UUID) async throws -> [BucketItem]{
@@ -69,7 +67,6 @@ class FirebaseService: ObservableObject {
         
         return try await FirebaseService.collectionToObjects(reference: reference,
                                                              type: BucketItem.self)
-        
     }
     
     func deleteBucket(id: UUID) async throws {
@@ -138,13 +135,6 @@ class FirebaseService: ObservableObject {
         }
         return await FirebaseService.updateFieldOnDocument(docref: reference, field: "color", value: color)
     }
-    
-//    func uploadLocation(bucketID: UUID, itemID: UUID, location: Location) async throws -> Result<Location, any Error> {
-//        guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
-//            throw BucketListErrors.firebaseReferenceInvalid
-//        }
-//        return await FirebaseService.updateFieldOnDocument(docref: reference, field: "location", value: location)
-//    }
     
     func uploadLocationName(bucketID: UUID, itemID: UUID, name: String) async throws -> Result<String, any Error> {
         guard let reference = FirebasePaths.getBucketItem(bucketId: bucketID, bucketItemId: itemID).documentReference else {
@@ -220,8 +210,7 @@ enum FirebasePaths {
     case createBucketItemInBucket(bucketID: UUID, bucketItem: BucketItem)
     case getBucket(id: UUID)
     case getBucketItem(bucketId: UUID, bucketItemId: UUID)
-    // case delBucket(id: UUID)
-    // case delItem(bucketId: UUID)
+    case getBucketFromItem(bucketItemId: UUID)
     
     //Collection Paths
     case getAllBuckets
@@ -254,7 +243,6 @@ enum FirebasePaths {
                 .collection(FirebasePaths.FirebasePathComponent.bucketItems.rawValue)
                 .document(bucketItemId.uuidString)
                 .self
-            
         default:
             return nil
             

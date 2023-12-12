@@ -13,10 +13,8 @@ class MapViewModel: ViewModel {
     var title: String { "Map" }
     
     @Published var buckets: [Bucket]?
-                
-    @Published var mapSelection: MKMapItem?
     
-    @Published var showDetails = false
+    @Published var mapSelection: BucketMapItem?
     
     @Published var getDirections = false
     
@@ -24,8 +22,8 @@ class MapViewModel: ViewModel {
     
     @Published var route: MKRoute?
     
-    @Published var routeDestination: MKMapItem?
-                    
+    @Published var routeDestination: BucketMapItem?
+    
     init() {
         refresh()
     }
@@ -36,14 +34,17 @@ class MapViewModel: ViewModel {
         }
     }
     
-    var mapItems: [MKMapItem] {
-        buckets?.items.compactMap{item -> MKMapItem? in
+    var mapItems: [BucketMapItem] {
+        buckets?.items.compactMap { itemCombo -> BucketMapItem? in
+            let item = itemCombo.1
+            let bucket = itemCombo.0
             guard let lat = item.latitude,
-               let long = item.longitude else {
+                  let long = item.longitude else {
                 return nil
             }
-            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))))
-            mapItem.name = item.title
+            let mapItem = BucketMapItem(bucketItem: item, bucket: bucket,  placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))))
+            mapItem.mapItem.name = item.title
+            
             return mapItem
         } ?? []
     }
@@ -61,16 +62,15 @@ class MapViewModel: ViewModel {
     }
     
     @MainActor
-    func fetchRoute() async {
-        if let mapSelection {
+    func fetchRoute(selectedItem: BucketMapItem) async {
+        
             let request = MKDirections.Request()
             request.source = .forCurrentLocation()
-            request.destination = mapSelection
+        request.destination = selectedItem.mapItem
             
             let result = try? await MKDirections(request: request).calculate()
             route = result?.routes.first
-            routeDestination = mapSelection
-        }
+            routeDestination = selectedItem
     }
 }
 
@@ -79,11 +79,50 @@ extension Sequence {
         _ transform: (Element) async throws -> T
     ) async rethrows -> [T] {
         var values = [T]()
-
+        
         for element in self {
             try await values.append(transform(element))
         }
-
+        
         return values
     }
 }
+
+extension CLLocationCoordinate2D: Equatable {
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.latitude == rhs.latitude &&
+        lhs.longitude == rhs.longitude
+    }
+    
+}
+
+class BucketMapItem: Hashable, Equatable, Identifiable {
+    static func == (lhs: BucketMapItem, rhs: BucketMapItem) -> Bool {
+        lhs.bucketItem == rhs.bucketItem &&
+        lhs.bucket == rhs.bucket &&
+        lhs.mapItem == rhs.mapItem
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(bucketItem)
+        hasher.combine(bucket)
+        hasher.combine(mapItem)
+    }
+    
+    var id: ObjectIdentifier {
+        mapItem.id
+    }
+    
+    init(bucketItem: BucketItem,
+         bucket: Bucket? = nil,
+         placemark: MKPlacemark) {
+        self.bucketItem = bucketItem
+        self.bucket = bucket
+        self.mapItem = .init(placemark: placemark)
+    }
+    
+    var bucketItem: BucketItem
+    var bucket: Bucket?
+    var mapItem: MKMapItem
+}
+

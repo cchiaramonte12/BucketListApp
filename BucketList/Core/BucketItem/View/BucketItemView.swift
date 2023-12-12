@@ -40,7 +40,7 @@ struct BucketItemCardView: View {
 
             }
             .cornerRadius(12)
-            
+                    
             if let name = viewModel.item.locationName {
                 Text("Location: \(name)")
                     .font(.subheadline)

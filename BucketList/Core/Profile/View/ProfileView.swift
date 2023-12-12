@@ -43,16 +43,22 @@ struct ProfileView: View {
                         Text("Settings")
                             .foregroundColor(.blue)
                     }
-                    
-                    Button {
-                        AuthService.shared.signOut()
-                    } label: {
-                        Text("Sign Out")
-                            .foregroundColor(.red)
-                    }
                 }
+                Button {
+                    AuthService.shared.signOut()
+                } label: {
+                    Text("Sign Out")
+                        .foregroundColor(.white)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .frame(width: 352, height: 44)
+                        .background(Color(.red))
+                        .cornerRadius(8)
+                }
+                .padding()
             }
-            .listStyle(InsetGroupedListStyle())
+            .listStyle(.plain)
             .navigationBarTitle("User Profile")
             .navigationBarTitleDisplayMode(.inline)
         }

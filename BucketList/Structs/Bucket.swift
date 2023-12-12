@@ -13,7 +13,7 @@ protocol FirebaseSafe: Codable{
     var dehydratedObject: Self { get }
 }
 
-struct Bucket: Identifiable, Hashable, Codable {
+struct Bucket: Identifiable, Hashable, Codable, Equatable {
     
     
     //MARK: Main Variables
@@ -51,7 +51,16 @@ extension Bucket: FirebaseSafe {
 }
 
 extension Array where Element == Bucket {
-    var items: [BucketItem] {
-        self.flatMap{$0.items ?? []}
+    var items: [(Bucket, BucketItem)] {
+        self
+            .map{bucket in
+                return bucket.items.map {item in
+                    (bucket, item)
+                }
+            }
+            .flatMap {combo -> [(Bucket, BucketItem)] in
+                guard let combo else { return [] }
+                return combo.1.map{(combo.0, $0)}
+            }
     }
 }
