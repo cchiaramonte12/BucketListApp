@@ -55,10 +55,22 @@ struct MapView: View {
                     }
                 }
             }
-            
-                .presentationDetents([.height(340)])
-                .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
-                .presentationCornerRadius(12)
+            .presentationDetents([.height(340)])
+            .presentationBackgroundInteraction(.enabled(upThrough: .height(340)))
+            .presentationCornerRadius(12)
+        }
+        .sheet(isPresented: $viewModel.routeDisplaying) {
+            CancelDirectionsView() {
+                viewModel.route = nil
+                viewModel.mapSelection = nil
+                withAnimation(.snappy) {
+                    viewModel.routeDisplaying = false
+                    position = .userLocation(fallback: .automatic)
+                }
+            }
+            .presentationDetents([.height(100)])
+            .presentationBackgroundInteraction(.enabled(upThrough: .height(100)))
+            .presentationCornerRadius(12)
         }
         .mapControls {
             MapCompass()
