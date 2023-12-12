@@ -9,32 +9,35 @@ import SwiftUI
 import MapKit
 
 struct MapItemDetailsView: View {
-    
-    @Binding var mapSelection: MKMapItem?
-    @Binding var show: Bool
+    @Environment(\.dismiss) var dismiss
+    var mapSelection: BucketMapItem
     @State private var lookAroundScene: MKLookAroundScene?
-    @Binding var getDirections: Bool
+    var getDirections: () -> ()
     
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(mapSelection?.placemark.name ?? "")
+                    Text(mapSelection.mapItem.placemark.name ?? "")
                         .font(.title2)
                         .fontWeight(.semibold)
                     
-                    Text(mapSelection?.placemark.title ?? "")
+                    OptionalView(value: mapSelection.bucket?.title) { value in
+                        Text("Bucket: \(value)")
+                    }
+                    
+                    Text(mapSelection.bucketItem.locationAddress ?? "")
                         .font(.footnote)
                         .foregroundStyle(.gray)
                         .lineLimit(2)
                         .padding(.trailing)
                 }
+                .padding(.top)
                 
                 Spacer()
                 
                 Button {
-                    show.toggle()
-                    mapSelection = nil
+                    dismiss()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
@@ -45,18 +48,16 @@ struct MapItemDetailsView: View {
             .padding([.horizontal, .top])
             
             if let scene = lookAroundScene {
-                LookAroundPreview(initialScene: scene)
-                    .frame(height: 200)
+                LookAroundPreview(initialScene: scene, allowsNavigation: true)
+                    .frame(height: 175)
                     .cornerRadius(12)
-                    .padding()
+                    .padding(.horizontal)
             } else {
                 ContentUnavailableView("No Preview Available", systemImage: "eye.slash")
             }
             HStack(spacing: 24) {
                 Button {
-                    if let mapSelection {
-                        mapSelection.openInMaps()
-                    }
+                    mapSelection.mapItem.openInMaps()
                 } label: {
                     Text("Open In Maps")
                         .font(.headline)
@@ -67,8 +68,7 @@ struct MapItemDetailsView: View {
                 }
                 
                 Button {
-                    getDirections = true
-                    show = false
+                    getDirections()
                 } label: {
                     Text("Get Directions")
                         .font(.headline)
@@ -93,12 +93,10 @@ struct MapItemDetailsView: View {
 
 extension MapItemDetailsView {
     func fetchLookAroundPreview() {
-        if let mapSelection {
-            lookAroundScene = nil
-            Task {
-                let request = MKLookAroundSceneRequest(mapItem: mapSelection)
-                lookAroundScene = try? await request.scene
-            }
+        lookAroundScene = nil
+        Task {
+            let request = MKLookAroundSceneRequest(coordinate: mapSelection.mapItem.placemark.coordinate)
+            lookAroundScene = try? await request.scene
         }
     }
 }

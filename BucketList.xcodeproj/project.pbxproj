@@ -73,6 +73,7 @@
 		7EA3ACC22ADD705200B40EFC /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3ACC12ADD705200B40EFC /* AddItemView.swift */; };
 		7EBD6D8C2AE2F4A5004839DA /* AddItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBD6D8B2AE2F4A5004839DA /* AddItemViewModel.swift */; };
 		7EBD6D8F2AE2F53C004839DA /* BucketCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBD6D8E2AE2F53C004839DA /* BucketCardViewModel.swift */; };
+		7EBF5A382B27D597003D9356 /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBF5A372B27D597003D9356 /* OptionalView.swift */; };
 		7EF32B6E2AD8B96B0059FE7A /* CreateBucketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF32B6D2AD8B96B0059FE7A /* CreateBucketView.swift */; };
 		7EF32B8A2AD9E2BF0059FE7A /* NavigationPathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF32B892AD9E2BF0059FE7A /* NavigationPathContainer.swift */; };
 		7EF32B8D2AD9E2FE0059FE7A /* NewStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF32B8C2AD9E2FE0059FE7A /* NewStack.swift */; };
@@ -127,6 +128,7 @@
 		7EA3ACC12ADD705200B40EFC /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		7EBD6D8B2AE2F4A5004839DA /* AddItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModel.swift; sourceTree = "<group>"; };
 		7EBD6D8E2AE2F53C004839DA /* BucketCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketCardViewModel.swift; sourceTree = "<group>"; };
+		7EBF5A372B27D597003D9356 /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
 		7EF32B6D2AD8B96B0059FE7A /* CreateBucketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBucketView.swift; sourceTree = "<group>"; };
 		7EF32B892AD9E2BF0059FE7A /* NavigationPathContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPathContainer.swift; sourceTree = "<group>"; };
 		7EF32B8C2AD9E2FE0059FE7A /* NewStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStack.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				7EF32B8C2AD9E2FE0059FE7A /* NewStack.swift */,
 				7EF32B932AD9E7520059FE7A /* SheetButton.swift */,
 				7EF32B912AD9E4160059FE7A /* DestinationView.swift */,
+				7EBF5A372B27D597003D9356 /* OptionalView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				7E5ED4842AFEC25D00A8D006 /* Location.swift in Sources */,
 				7E5F335D2AD6FB5C000357DC /* AppState.swift in Sources */,
 				7E5F33882AD71EE6000357DC /* BucketItem.swift in Sources */,
+				7EBF5A382B27D597003D9356 /* OptionalView.swift in Sources */,
 				7E5F33802AD71541000357DC /* BucketCardView.swift in Sources */,
 				7E5F338C2AD7215E000357DC /* BucketView.swift in Sources */,
 				7E8BE2682ADD8AFC000124BB /* UserService.swift in Sources */,

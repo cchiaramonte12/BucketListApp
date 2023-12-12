@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct BucketItem: Identifiable, Hashable, Codable {
+struct BucketItem: Identifiable, Hashable, Codable, Equatable {
     
     static func == (lhs: BucketItem, rhs: BucketItem) -> Bool {
         return lhs.id == rhs.id
