@@ -53,7 +53,11 @@ struct MapItemDetailsView: View {
                     .cornerRadius(12)
                     .padding(.horizontal)
             } else {
-                ContentUnavailableView("No Preview Available", systemImage: "eye.slash")
+                VStack {
+                    Image(systemName: "eye.slash")
+                    ContentUnavailableView("No Preview Available", systemImage: "plus")
+                }
+                .padding(.top)
             }
             HStack(spacing: 24) {
                 Button {

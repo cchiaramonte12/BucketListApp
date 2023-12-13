@@ -29,15 +29,6 @@ struct BucketItemCardView: View {
                 }
                 
                 Spacer()
-                
-                TapButton {
-                    navigationPathContainer.path.append(NavigationDestination.addLocation(onTapAction: viewModel.addLocationToBucketItem,
-                                                                     returnedLocation: $viewModel.returnedLocation))
-                } content: {
-                    Image(systemName: "mappin.circle")
-                        .foregroundColor(Color(hex: "398378"))
-                }
-
             }
             .cornerRadius(12)
                     
@@ -46,8 +37,18 @@ struct BucketItemCardView: View {
                     .font(.subheadline)
                     .foregroundColor(Color(hex: "398378"))
             } else {
-                Text("Add a location")
-                    .font(.footnote)
+                HStack {
+                    Text("Add a location:")
+                        .font(.footnote)
+                    
+                    TapButton {
+                        navigationPathContainer.path.append(NavigationDestination.addLocation(onTapAction: viewModel.addLocationToBucketItem,
+                                                                                              returnedLocation: $viewModel.returnedLocation))
+                    } content: {
+                        Image(systemName: "mappin.circle")
+                            .foregroundColor(Color(hex: "398378"))
+                    }
+                }
             }
         }
         .padding()
