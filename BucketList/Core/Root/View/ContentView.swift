@@ -14,12 +14,6 @@ struct ContentView: View {
     //@EnvironmentObject var appState: AppState
     
     var body: some View {
-        Group {
-            if viewModel.userSession != nil {
-                MainView()
-            } else {
-                LogInView()
-            }
-        }
+        MainView()
     }
 }

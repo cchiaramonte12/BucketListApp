@@ -8,5 +8,6 @@
 import Foundation
 
 enum BucketListErrors: Error {
-     case firebaseReferenceInvalid
+    case firebaseReferenceInvalid
+    case currentUserIdNil
 }

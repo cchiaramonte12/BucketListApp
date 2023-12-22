@@ -18,16 +18,26 @@ class CreateBucketViewModel: ObservableObject {
     @Published var description = ""
     @Published var headerImageUrl = ""
     @Published var id = UUID()
-    
+    @Published var currentUser: User?
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { await loadImage() } }
     }
     
     @Published var color: Color = Color.black
-    
     @Published var headerImage: Image?
     
     private var uiImage: UIImage?
+    private var cancellables = Set<AnyCancellable>()
+    
+    
+    init() {
+        setupSubscribers()
+    }
+    private func setupSubscribers() {
+        UserService.shared.$currentUser.sink { [weak self] user in
+            self?.currentUser = user
+        }.store(in: &cancellables)
+    }
     
     @MainActor
     private func loadImage() async {
@@ -39,7 +49,16 @@ class CreateBucketViewModel: ObservableObject {
     }
     
     func uploadBucket() async throws {
-        let bucket = Bucket(id: UUID(), title: title, date: Date(), description: description, headerImageUrl: headerImageUrl.isEmpty ? nil : "")
+        guard let userId = currentUser?.id else {
+            throw BucketListErrors.currentUserIdNil
+        }
+
+        let bucket = Bucket(id: UUID(),
+                            ownerId: userId,
+                            title: title,
+                            date: Date(),
+                            description: description,
+                            headerImageUrl: headerImageUrl.isEmpty ? nil : "")
         try await FirebaseService.shared.uploadBucket(bucket)
         try await updateHeaderImage(id: bucket.id)
         try await updateColor(id: bucket.id)

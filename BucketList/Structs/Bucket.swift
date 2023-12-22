@@ -18,12 +18,12 @@ struct Bucket: Identifiable, Hashable, Codable, Equatable {
     
     //MARK: Main Variables
     var id: UUID
+    var ownerId: String
     var title: String
     var date: Date
     var description: String?
     var headerImageUrl: String?
     var color: String?
-    
     
     //MARK: Computed Variables
     var fallbackColor: UIColor {
@@ -46,7 +46,7 @@ extension Bucket {
 
 extension Bucket: FirebaseSafe {
     var dehydratedObject: Bucket {
-        .init(id: id, title: title, date: date, description: description, headerImageUrl: headerImageUrl, color: color)
+        .init(id: id, ownerId: ownerId, title: title, date: date, description: description, headerImageUrl: headerImageUrl, color: color)
     }
 }
 
