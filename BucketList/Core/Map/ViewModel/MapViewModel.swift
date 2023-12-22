@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import Combine
 
 class MapViewModel: ViewModel {
     
@@ -24,8 +25,19 @@ class MapViewModel: ViewModel {
     
     @Published var routeDestination: BucketMapItem?
     
+    private var cancellables = Set<AnyCancellable>()
+    
+    @Published var currentUser: User?
+    
+    private func setupSubscribers() {
+        UserService.shared.$currentUser.sink { [weak self] user in
+            self?.currentUser = user
+        }.store(in: &cancellables)
+    }
+    
     init() {
         refresh()
+        setupSubscribers()
     }
     
     func refresh() {
@@ -51,7 +63,14 @@ class MapViewModel: ViewModel {
     
     func asyncRefresh() async {
         do {
-            let buckets = try await FirebaseService.shared.getBuckets().asyncMap { try await $0.withItems() }
+            guard let userId = currentUser?.id else {
+                throw BucketListErrors.currentUserIdNil
+            }
+            let buckets = try await FirebaseService
+                .shared
+                .getBuckets(for: userId)
+                .asyncMap { try await $0.withItems() }
+            
             
             await MainActor.run {
                 self.buckets = buckets

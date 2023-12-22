@@ -26,9 +26,6 @@ struct HomeView: View {
                                     ZStack {
                                         NavigationLink(value: NavigationDestination.bucketView(id: bucket.id, bucket: bucket)) {
                                             BucketCardView(viewModel: BucketCardViewModel(bucket: bucket))
-                                                .onAppear(perform: {
-                                                    viewModel.refresh()
-                                                })
                                         }
                                     }
                                 }
@@ -36,8 +33,15 @@ struct HomeView: View {
                                 NoBucketsView()
                             }
                         } else {
-                            ProgressView {
-                                Text("Loading Buckets")
+                            VStack {
+                                Button(action: {
+                                    print(viewModel.currentUser)
+                                }, label: {
+                                    Text("Test")
+                                })
+                                ProgressView {
+                                    Text("Loading Buckets")
+                                }
                             }
                         }
                     }

@@ -3,4 +3,162 @@
    uuid = "A7E812F8-598E-4F26-9362-CC60339AC10A"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3468951E-A185-4CE6-8D29-BE97598864AC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BucketList/Core/Home/ViewModel/HomeViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "asyncRefresh()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "282DA637-EECB-4053-A110-45D573D4B37C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BucketList/Core/Home/View/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "282DA637-EECB-4053-A110-45D573D4B37C - 7a45afcd322620c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;BucketList.Bucket&gt;, Foundation.UUID, SwiftUI.ZStack&lt;SwiftUI.NavigationLink&lt;&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, Swift.Never&gt;&gt;&gt;, BucketList.NoBucketsView&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI.LazyVStack&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;BucketList.Bucket&gt;, Foundation.UUID, SwiftUI.ZStack&lt;SwiftUI.NavigationLink&lt;&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, Swift.Never&gt;&gt;&gt;, BucketList.NoBucketsView&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt;&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.refreshable(action: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.refreshable(action: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in BucketList.HomeView.body.getter : some"
+                  moduleName = "BucketList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameron/Documents/GitHub/BucketListApp/BucketList/Core/Home/View/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "2280">
+               </Location>
+               <Location
+                  uuid = "282DA637-EECB-4053-A110-45D573D4B37C - d8934ca3cd54642d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;BucketList.Bucket&gt;, Foundation.UUID, SwiftUI.ZStack&lt;SwiftUI.NavigationLink&lt;BucketList.BucketCardView, Swift.Never&gt;&gt;&gt;, BucketList.NoBucketsView&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI.LazyVStack&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;BucketList.Bucket&gt;, Foundation.UUID, SwiftUI.ZStack&lt;SwiftUI.NavigationLink&lt;BucketList.BucketCardView, Swift.Never&gt;&gt;&gt;, BucketList.NoBucketsView&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt;&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.refreshable(action: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.refreshable(action: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in BucketList.HomeView.body.getter : some"
+                  moduleName = "BucketList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameron/Documents/GitHub/BucketListApp/BucketList/Core/Home/View/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D6048449-3234-4B47-A1F8-9CCF680EAC06"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            filePath = "BucketList/Core/Authentication/ViewModel/RegistrationViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "createUser()"
+            landmarkType = "7">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "expression email = &quot;cameron+&quot; + String(Int.random(in: 10000000...99999999)) + &quot;@test.com&quot;">
+                  </ActionContent>
+               </BreakpointActionProxy>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "expression password = &quot;pa&quot;">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+            <Locations>
+               <Location
+                  uuid = "D6048449-3234-4B47-A1F8-9CCF680EAC06 - 8c33b36bfa2a4d93"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for BucketList.RegistrationViewModel.createUser() async throws -&gt; ()"
+                  moduleName = "BucketList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameron/Documents/GitHub/BucketListApp/BucketList/Core/Authentication/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "D6048449-3234-4B47-A1F8-9CCF680EAC06 - 8a3c15a4f528105f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for BucketList.RegistrationViewModel.createUser() async throws -&gt; ()"
+                  moduleName = "BucketList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameron/Documents/GitHub/BucketListApp/BucketList/Core/Authentication/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "D6048449-3234-4B47-A1F8-9CCF680EAC06 - 1efd52ed7b370f8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for BucketList.RegistrationViewModel.createUser() async throws -&gt; ()"
+                  moduleName = "BucketList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameron/Documents/GitHub/BucketListApp/BucketList/Core/Authentication/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "D6048449-3234-4B47-A1F8-9CCF680EAC06 - 561bc2ac3b866e8e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for BucketList.RegistrationViewModel.createUser() async throws -&gt; ()"
+                  moduleName = "BucketList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameron/Documents/GitHub/BucketListApp/BucketList/Core/Authentication/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
