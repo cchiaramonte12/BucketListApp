@@ -129,25 +129,6 @@ struct CreateBucketView: View {
     }
 }
 
-
-struct OptionalColorPicker: View {
-    
-    init(boundColor: Binding<Color?>,
-         defaultColor: Color = .black) {
-        self.color = boundColor.wrappedValue ?? defaultColor
-        _boundColor = boundColor
-    }
-    
-    @Binding var boundColor: Color?
-    @State var color: Color
-    var body: some View {
-        ColorPicker("Some Title", selection: $color)
-            .onChange(of: color) {
-                self.boundColor = color
-            }
-    }
-}
-
 public extension Binding where Value: Equatable {
     init(_ source: Binding<Value?>, replacingNilWith nilProxy: Value, setNilWhenProxyChosen: Bool = true) {
         self.init(

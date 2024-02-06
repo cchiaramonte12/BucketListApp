@@ -10,7 +10,6 @@ import SwiftUI
 
 struct DestinationView: View {
     let destination: NavigationDestination
-    //@State private var returnedLocation = Location(mapItem: MKMapItem()) // Add a state property for the returned location
     var body: some View {
         switch destination {
         case .bucketView(let id, let bucket):

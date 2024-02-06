@@ -13,6 +13,11 @@
 		7E173FF52B289EAB00FF54EC /* CancelDirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E173FF42B289EAB00FF54EC /* CancelDirectionsView.swift */; };
 		7E3B13E72AED5A640076CB37 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E62AED5A640076CB37 /* FirebaseService.swift */; };
 		7E3B13E92AED5E0F0076CB37 /* BucketListErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */; };
+		7E4644B32B71BF1F007DDF11 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4644B22B71BF1F007DDF11 /* Color.swift */; };
+		7E4644B52B71BF5E007DDF11 /* TapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4644B42B71BF5E007DDF11 /* TapButton.swift */; };
+		7E4644B72B71BFBF007DDF11 /* OptionalColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4644B62B71BFBF007DDF11 /* OptionalColorPicker.swift */; };
+		7E4644B92B71C006007DDF11 /* BucketMapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4644B82B71C006007DDF11 /* BucketMapItem.swift */; };
+		7E4644BB2B71C030007DDF11 /* MapStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4644BA2B71C030007DDF11 /* MapStuff.swift */; };
 		7E5606CB2AE03114001F826A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5606CA2AE03114001F826A /* MapView.swift */; };
 		7E5ED47F2AFEC21600A8D006 /* AddLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5ED47E2AFEC21600A8D006 /* AddLocationView.swift */; };
 		7E5ED4822AFEC23500A8D006 /* AddLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5ED4812AFEC23500A8D006 /* AddLocationViewModel.swift */; };
@@ -50,7 +55,6 @@
 		7E5F334F2AD6FA58000357DC /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5F334E2AD6FA58000357DC /* FirebaseRemoteConfigSwift */; };
 		7E5F33512AD6FA58000357DC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5F33502AD6FA58000357DC /* FirebaseStorage */; };
 		7E5F33532AD6FA58000357DC /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5F33522AD6FA58000357DC /* FirebaseStorageCombine-Community */; };
-		7E5F335D2AD6FB5C000357DC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F335C2AD6FB5C000357DC /* AppState.swift */; };
 		7E5F33602AD6FB84000357DC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F335F2AD6FB84000357DC /* ProfileView.swift */; };
 		7E5F33652AD6FBBD000357DC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F33642AD6FBBD000357DC /* AuthService.swift */; };
 		7E5F33672AD6FBDF000357DC /* ForgotPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F33662AD6FBDF000357DC /* ForgotPassView.swift */; };
@@ -94,6 +98,11 @@
 		7E173FF42B289EAB00FF54EC /* CancelDirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelDirectionsView.swift; sourceTree = "<group>"; };
 		7E3B13E62AED5A640076CB37 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		7E3B13E82AED5E0F0076CB37 /* BucketListErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListErrors.swift; sourceTree = "<group>"; };
+		7E4644B22B71BF1F007DDF11 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		7E4644B42B71BF5E007DDF11 /* TapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapButton.swift; sourceTree = "<group>"; };
+		7E4644B62B71BFBF007DDF11 /* OptionalColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalColorPicker.swift; sourceTree = "<group>"; };
+		7E4644B82B71C006007DDF11 /* BucketMapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketMapItem.swift; sourceTree = "<group>"; };
+		7E4644BA2B71C030007DDF11 /* MapStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStuff.swift; sourceTree = "<group>"; };
 		7E5606CA2AE03114001F826A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		7E5ED47E2AFEC21600A8D006 /* AddLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationView.swift; sourceTree = "<group>"; };
 		7E5ED4812AFEC23500A8D006 /* AddLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +114,6 @@
 		7E5F33112AD6F968000357DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E5F33142AD6F968000357DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7E5F331B2AD6FA15000357DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7E5F335C2AD6FB5C000357DC /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		7E5F335F2AD6FB84000357DC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7E5F33642AD6FBBD000357DC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		7E5F33662AD6FBDF000357DC /* ForgotPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassView.swift; sourceTree = "<group>"; };
@@ -185,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				6E15D5602AF2D5460053891B /* URL.swift */,
+				7E4644B22B71BF1F007DDF11 /* Color.swift */,
+				7E4644BA2B71C030007DDF11 /* MapStuff.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -383,11 +393,11 @@
 		7E5F335A2AD6FB25000357DC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7E5F335C2AD6FB5C000357DC /* AppState.swift */,
 				7EF32B892AD9E2BF0059FE7A /* NavigationPathContainer.swift */,
 				7E8BE2672ADD8AFC000124BB /* UserService.swift */,
 				7E3B13E62AED5A640076CB37 /* FirebaseService.swift */,
 				7E5ED4852AFEC39700A8D006 /* LocationManager.swift */,
+				7E4644B82B71C006007DDF11 /* BucketMapItem.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -400,6 +410,8 @@
 				7E8BE2652ADD8804000124BB /* User.swift */,
 				7EFE4B732AE0AC8400A13A53 /* ItemToggleStyle.swift */,
 				7E5ED4832AFEC25D00A8D006 /* Location.swift */,
+				7E4644B42B71BF5E007DDF11 /* TapButton.swift */,
+				7E4644B62B71BFBF007DDF11 /* OptionalColorPicker.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -764,6 +776,7 @@
 				7E5F33672AD6FBDF000357DC /* ForgotPassView.swift in Sources */,
 				7E08C0452AF3F65C0047B94C /* MapViewModel.swift in Sources */,
 				7EF32B942AD9E7520059FE7A /* SheetButton.swift in Sources */,
+				7E4644B32B71BF1F007DDF11 /* Color.swift in Sources */,
 				7E5F337C2AD70805000357DC /* MainView.swift in Sources */,
 				7EBD6D8C2AE2F4A5004839DA /* AddItemViewModel.swift in Sources */,
 				7E5F336F2AD6FC37000357DC /* RegistrationViewModel.swift in Sources */,
@@ -772,6 +785,7 @@
 				7E173FF52B289EAB00FF54EC /* CancelDirectionsView.swift in Sources */,
 				7EF32B972AD9F82E0059FE7A /* CreateBucketViewModel.swift in Sources */,
 				7E5ED4822AFEC23500A8D006 /* AddLocationViewModel.swift in Sources */,
+				7E4644B52B71BF5E007DDF11 /* TapButton.swift in Sources */,
 				7E5F33692AD6FBF9000357DC /* LogInView.swift in Sources */,
 				7E5F33722AD6FC60000357DC /* HomeView.swift in Sources */,
 				7E5ED47F2AFEC21600A8D006 /* AddLocationView.swift in Sources */,
@@ -784,7 +798,7 @@
 				7EF32B902AD9E3CE0059FE7A /* NavigationDestination.swift in Sources */,
 				7E5ED4862AFEC39700A8D006 /* LocationManager.swift in Sources */,
 				7E5ED4842AFEC25D00A8D006 /* Location.swift in Sources */,
-				7E5F335D2AD6FB5C000357DC /* AppState.swift in Sources */,
+				7E4644B72B71BFBF007DDF11 /* OptionalColorPicker.swift in Sources */,
 				7E5F33882AD71EE6000357DC /* BucketItem.swift in Sources */,
 				7EBF5A382B27D597003D9356 /* OptionalView.swift in Sources */,
 				7E5F33802AD71541000357DC /* BucketCardView.swift in Sources */,
@@ -797,12 +811,14 @@
 				7E8BE2662ADD8804000124BB /* User.swift in Sources */,
 				7E5F33762AD70373000357DC /* ContentViewModel.swift in Sources */,
 				7EFA06032AF41512006BBF98 /* MapItemDetailsView.swift in Sources */,
+				7E4644B92B71C006007DDF11 /* BucketMapItem.swift in Sources */,
 				7EF32B8A2AD9E2BF0059FE7A /* NavigationPathContainer.swift in Sources */,
 				7E8BE26C2ADD8BBE000124BB /* ProfileViewModel.swift in Sources */,
 				7E97DD042AE0A29D002626C2 /* BucketViewModel.swift in Sources */,
 				7EF32B9A2AD9F8670059FE7A /* HomeViewModel.swift in Sources */,
 				7E3B13E72AED5A640076CB37 /* FirebaseService.swift in Sources */,
 				7E5F33102AD6F967000357DC /* ContentView.swift in Sources */,
+				7E4644BB2B71C030007DDF11 /* MapStuff.swift in Sources */,
 				7E5F330E2AD6F967000357DC /* BucketListApp.swift in Sources */,
 				7E5F336D2AD6FC23000357DC /* RegistrationView.swift in Sources */,
 				7EF32B8D2AD9E2FE0059FE7A /* NewStack.swift in Sources */,

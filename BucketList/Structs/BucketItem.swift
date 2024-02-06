@@ -28,7 +28,6 @@ struct BucketItem: Identifiable, Hashable, Codable, Equatable {
     var locationAddress: String?
     var latitude: Float?
     var longitude: Float?
-//    var location: Location?
 }
 
 extension BucketItem: FirebaseSafe {

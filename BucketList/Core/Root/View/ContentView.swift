@@ -10,9 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var viewModel = ContentViewModel()
-    
-    //@EnvironmentObject var appState: AppState
-    
+        
     var body: some View {
         MainView()
     }

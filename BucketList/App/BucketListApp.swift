@@ -24,8 +24,6 @@ struct BucketApp: App {
     
     @StateObject var locationManager = LocationManager()
 
-    
-    //@ObservedObject var appState = AppState.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -34,6 +32,3 @@ struct BucketApp: App {
         }
     }
 }
-
-/**ContentView()
- .environmentObject(appState)*/

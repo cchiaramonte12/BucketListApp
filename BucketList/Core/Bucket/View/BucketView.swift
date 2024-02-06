@@ -139,23 +139,3 @@ struct BucketView: View {
     }
 }
 
-func getRandomColor() -> UIColor {
-    let red:CGFloat = CGFloat(drand48())
-    let green:CGFloat = CGFloat(drand48())
-    let blue:CGFloat = CGFloat(drand48())
-    
-    return UIColor(red:red, green: green, blue: blue, alpha: 1.0)
-}
-
-struct TapButton<V: View>: View {
-    var action: () -> Void
-    @ViewBuilder var content: () -> V
-    
-    var body: some View {
-        content()
-            .onTapGesture {
-                action()
-            }
-    }
-}
-

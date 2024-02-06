@@ -31,7 +31,3 @@ struct NoBucketsView: View {
         
     }
 }
-
-#Preview {
-    NoBucketsView()
-}
